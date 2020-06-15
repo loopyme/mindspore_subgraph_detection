@@ -169,12 +169,12 @@ class LeNet5(nn.Cell):
         return x
 
 
-def train_net(model, epoch_size, mnist_path, repeat_size, ckpoint_cb, sink_mode):
+def train_net(model, epoch_size, mnist_path, repeat_size, ckpoint_cb, sink_mode, callbacks):
     """Define the training method."""
     print("============== Starting Training ==============")
     # load training dataset
     ds_train = create_dataset(os.path.join(mnist_path, "train"), 32, repeat_size)
-    model.train(epoch_size, ds_train, callbacks=[ckpoint_cb, LossMonitor()], dataset_sink_mode=sink_mode)
+    model.train(epoch_size, ds_train, callbacks=[ckpoint_cb, LossMonitor()] + callbacks, dataset_sink_mode=sink_mode)
 
 
 def test_net(network, model, mnist_path):

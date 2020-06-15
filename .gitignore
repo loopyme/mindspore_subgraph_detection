@@ -219,6 +219,9 @@ dkms.conf
 *.pb
 *.ir
 *.meta
+events.out.events.summary.*
+out.events.summary.*
+./playground/summary/
 .clangd
 
 # Mindspore & Mindsight src

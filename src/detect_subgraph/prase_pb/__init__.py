@@ -1,7 +1,6 @@
 from typing import Union
 
 from google.protobuf.text_format import ParseError
-
 from mindinsight.datavisual.common.log import logger
 from mindinsight.datavisual.data_access.file_handler import FileHandler
 from mindinsight.datavisual.data_transform.graph import MSGraph
@@ -11,7 +10,7 @@ from mindinsight.utils.exceptions import UnknownError
 
 def phase_pb_file(file_path: str) -> Union[MSGraph, None]:
     """
-    Parse pb file and write content to `EventsData`.
+    Parse pb file to graph
 
     Args:
         file_path (str): The file path of pb file.
