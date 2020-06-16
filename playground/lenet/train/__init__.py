@@ -36,7 +36,7 @@ def unzipfile(gzip_path):
     Args:
         gzip_path: dataset file path
     """
-    open_file = open(gzip_path.replace('.gz', ''), 'wb')
+    open_file = open(gzip_path.replace(".gz", ""), "wb")
     gz_file = gzip.GzipFile(gzip_path)
     open_file.write(gz_file.read())
     gz_file.close()
@@ -52,31 +52,34 @@ def download_dataset():
     if train_path_check == False and test_path_check == False:
         os.makedirs(train_path)
         os.makedirs(test_path)
-    train_url = {"http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz",
-                 "http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz"}
-    test_url = {"http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz",
-                "http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz"}
+    train_url = {
+        "http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz",
+        "http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz",
+    }
+    test_url = {
+        "http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz",
+        "http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz",
+    }
 
     for url in train_url:
         url_parse = urlparse(url)
         # split the file name from url
-        file_name = os.path.join(train_path, url_parse.path.split('/')[-1])
-        if not os.path.exists(file_name.replace('.gz', '')):
+        file_name = os.path.join(train_path, url_parse.path.split("/")[-1])
+        if not os.path.exists(file_name.replace(".gz", "")):
             file = urllib.request.urlretrieve(url, file_name)
             unzipfile(file_name)
             os.remove(file_name)
     for url in test_url:
         url_parse = urlparse(url)
         # split the file name from url
-        file_name = os.path.join(test_path, url_parse.path.split('/')[-1])
-        if not os.path.exists(file_name.replace('.gz', '')):
+        file_name = os.path.join(test_path, url_parse.path.split("/")[-1])
+        if not os.path.exists(file_name.replace(".gz", "")):
             file = urllib.request.urlretrieve(url, file_name)
             unzipfile(file_name)
             os.remove(file_name)
 
 
-def create_dataset(data_path, batch_size=32, repeat_size=1,
-                   num_parallel_workers=1):
+def create_dataset(data_path, batch_size=32, repeat_size=1, num_parallel_workers=1):
     """ create dataset for train or test
     Args:
         data_path: Data path
@@ -95,22 +98,50 @@ def create_dataset(data_path, batch_size=32, repeat_size=1,
     shift_nml = -1 * 0.1307 / 0.3081
 
     # define map operations
-    resize_op = CV.Resize((resize_height, resize_width), interpolation=Inter.LINEAR)  # Resize images to (32, 32)
+    resize_op = CV.Resize(
+        (resize_height, resize_width), interpolation=Inter.LINEAR
+    )  # Resize images to (32, 32)
     rescale_nml_op = CV.Rescale(rescale_nml, shift_nml)  # normalize images
     rescale_op = CV.Rescale(rescale, shift)  # rescale images
-    hwc2chw_op = CV.HWC2CHW()  # change shape from (height, width, channel) to (channel, height, width) to fit network.
-    type_cast_op = C.TypeCast(mstype.int32)  # change data type of label to int32 to fit network
+    hwc2chw_op = (
+        CV.HWC2CHW()
+    )  # change shape from (height, width, channel) to (channel, height, width) to fit network.
+    type_cast_op = C.TypeCast(
+        mstype.int32
+    )  # change data type of label to int32 to fit network
 
     # apply map operations on images
-    mnist_ds = mnist_ds.map(input_columns="label", operations=type_cast_op, num_parallel_workers=num_parallel_workers)
-    mnist_ds = mnist_ds.map(input_columns="image", operations=resize_op, num_parallel_workers=num_parallel_workers)
-    mnist_ds = mnist_ds.map(input_columns="image", operations=rescale_op, num_parallel_workers=num_parallel_workers)
-    mnist_ds = mnist_ds.map(input_columns="image", operations=rescale_nml_op, num_parallel_workers=num_parallel_workers)
-    mnist_ds = mnist_ds.map(input_columns="image", operations=hwc2chw_op, num_parallel_workers=num_parallel_workers)
+    mnist_ds = mnist_ds.map(
+        input_columns="label",
+        operations=type_cast_op,
+        num_parallel_workers=num_parallel_workers,
+    )
+    mnist_ds = mnist_ds.map(
+        input_columns="image",
+        operations=resize_op,
+        num_parallel_workers=num_parallel_workers,
+    )
+    mnist_ds = mnist_ds.map(
+        input_columns="image",
+        operations=rescale_op,
+        num_parallel_workers=num_parallel_workers,
+    )
+    mnist_ds = mnist_ds.map(
+        input_columns="image",
+        operations=rescale_nml_op,
+        num_parallel_workers=num_parallel_workers,
+    )
+    mnist_ds = mnist_ds.map(
+        input_columns="image",
+        operations=hwc2chw_op,
+        num_parallel_workers=num_parallel_workers,
+    )
 
     # apply DatasetOps
     buffer_size = 10000
-    mnist_ds = mnist_ds.shuffle(buffer_size=buffer_size)  # 10000 as in LeNet train script
+    mnist_ds = mnist_ds.shuffle(
+        buffer_size=buffer_size
+    )  # 10000 as in LeNet train script
     mnist_ds = mnist_ds.batch(batch_size, drop_remainder=True)
     mnist_ds = mnist_ds.repeat(repeat_size)
 
@@ -120,9 +151,16 @@ def create_dataset(data_path, batch_size=32, repeat_size=1,
 def conv(in_channels, out_channels, kernel_size, stride=1, padding=0):
     """Conv layer weight initial."""
     weight = weight_variable()
-    return nn.Conv2d(in_channels, out_channels,
-                     kernel_size=kernel_size, stride=stride, padding=padding,
-                     weight_init=weight, has_bias=False, pad_mode="valid")
+    return nn.Conv2d(
+        in_channels,
+        out_channels,
+        kernel_size=kernel_size,
+        stride=stride,
+        padding=padding,
+        weight_init=weight,
+        has_bias=False,
+        pad_mode="valid",
+    )
 
 
 def fc_with_initialize(input_channels, out_channels):
@@ -169,12 +207,19 @@ class LeNet5(nn.Cell):
         return x
 
 
-def train_net(model, epoch_size, mnist_path, repeat_size, ckpoint_cb, sink_mode, callbacks):
+def train_net(
+        model, epoch_size, mnist_path, repeat_size, ckpoint_cb, sink_mode, callbacks
+):
     """Define the training method."""
     print("============== Starting Training ==============")
     # load training dataset
     ds_train = create_dataset(os.path.join(mnist_path, "train"), 32, repeat_size)
-    model.train(epoch_size, ds_train, callbacks=[ckpoint_cb, LossMonitor()] + callbacks, dataset_sink_mode=sink_mode)
+    model.train(
+        epoch_size,
+        ds_train,
+        callbacks=[ckpoint_cb, LossMonitor()] + callbacks,
+        dataset_sink_mode=sink_mode,
+    )
 
 
 def test_net(network, model, mnist_path):

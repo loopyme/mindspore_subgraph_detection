@@ -9,7 +9,7 @@ from mindspore.train.summary import SummaryRecord
 
 from playground.lenet.train import train_net, test_net, LeNet5
 
-context.set_context(mode=context.GRAPH_MODE, save_graphs=True, device_target='CPU')
+context.set_context(mode=context.GRAPH_MODE, save_graphs=True, device_target="CPU")
 dataset_sink_mode = False
 
 # download mnist dataset
@@ -22,7 +22,7 @@ epoch_size = 1
 mnist_path = "../MNIST_Data"
 
 # define the loss function
-net_loss = SoftmaxCrossEntropyWithLogits(is_grad=False, sparse=True, reduction='mean')
+net_loss = SoftmaxCrossEntropyWithLogits(is_grad=False, sparse=True, reduction="mean")
 repeat_size = epoch_size
 
 # create the network
@@ -38,14 +38,21 @@ ckpoint_cb = ModelCheckpoint(prefix="checkpoint_lenet", config=config_ck)
 # group layers into an object with training and evaluation features
 model = Model(network, net_loss, net_opt, metrics={"Accuracy": Accuracy()})
 
-summary_writer = SummaryRecord(log_dir='../../summary', network=network)
+summary_writer = SummaryRecord(log_dir="../../summary", network=network)
 summary_callback = SummaryStep(summary_writer, flush_step=10)
 
 # Init TrainLineage to record the training information
 train_callback = TrainLineage(summary_writer)
 
-train_net(model, epoch_size, mnist_path, repeat_size, ckpoint_cb, dataset_sink_mode,
-          callbacks=[summary_callback, train_callback])
+train_net(
+    model,
+    epoch_size,
+    mnist_path,
+    repeat_size,
+    ckpoint_cb,
+    dataset_sink_mode,
+    callbacks=[summary_callback, train_callback],
+)
 
 test_net(network, model, mnist_path)
 

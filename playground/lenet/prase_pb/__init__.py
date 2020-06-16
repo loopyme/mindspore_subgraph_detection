@@ -12,7 +12,11 @@ non_normal_node_type = [
 
 
 def get_node_id(node_map: Dict[str, Node], node_name: str) -> str:
-    """help to track down the input/output node type"""
+    """
+    help to track down the input/output node type
+
+    AGGREGATION_SCOPE & NAME_SCOPE may able to save us some time in isomorphism check
+    """
     node: Node = node_map[node_name]
     if node is None:
         return ""
@@ -31,7 +35,11 @@ def get_node_id(node_map: Dict[str, Node], node_name: str) -> str:
 def get_nodes_info(
         node_map: Dict[str, Node]
 ) -> Tuple[List[Dict[str, Union[list, Any]]], List[Dict[str, Union[list, Any]]]]:
-    """Extract all that we need in subgraph detection from a node"""
+    """
+    Extract all that we need in subgraph detection from all nodes
+
+    Maybe later we design a data structure for this
+    """
     get_node_id_partial = partial(get_node_id, node_map)
 
     def get_node_info(node: Node):
