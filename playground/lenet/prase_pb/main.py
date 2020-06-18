@@ -3,7 +3,8 @@ import logging
 from mindinsight.datavisual.common.log import logger
 from mindinsight.datavisual.data_transform.graph import MSGraph
 
-from detect_subgraph.prase_pb import phase_pb_file
+from DataStucture.SimpleMindsporeGraph.smsgraph import SMSGraph
+from detect_subgraph.prase_pb_file import phase_pb_file
 from playground.help import print_table
 from playground.lenet.prase_pb import get_nodes_info
 
@@ -37,3 +38,5 @@ SparseSoftmaxCrossEntropyWithLogits  16  ['15', 'P']        ['17']        []    
 make_tuple                           17  ['16', '15', 'P']  []            []      []
 -----------------------------------  --  -----------------  ------------  ------  --
 """
+
+SMSGraph(graph)
