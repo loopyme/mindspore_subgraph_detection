@@ -16,3 +16,10 @@ class SNode:
         self.type = type
         self.upstream = upstream
         self.downstream = downstream
+
+    @property
+    def id(self):
+        return self.MSGraph_id
+
+    def __str__(self):
+        return f'Node-{self.MSGraph_id} {self.type}'

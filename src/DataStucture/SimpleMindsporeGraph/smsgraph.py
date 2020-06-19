@@ -1,9 +1,9 @@
 """This file is used to define the simplified MindSpore graph."""
-from typing import Dict
 
 from mindinsight.datavisual.data_transform.graph import MSGraph
 from mindinsight.datavisual.data_transform.graph.node import Node, NodeTypeEnum
 
+from DataStucture.NodeSet.nodeset import NodeSet
 from DataStucture.SimpleMindsporeGraph.snode import SNode
 
 
@@ -26,10 +26,10 @@ class SMSGraph:
         """
 
         # Used to store all snodes, and the key is node id, value is `SNode` object.
-        self.snode_map = SMSGraph.parse_MSGraph(graph)
+        self.node_set: NodeSet = SMSGraph.parse_MSGraph(graph)
 
     @staticmethod
-    def parse_MSGraph(msgraph: MSGraph) -> Dict[int, SNode]:
+    def parse_MSGraph(msgraph: MSGraph) -> NodeSet:
         """
         Parse a MSGraph to SMSGraph
         Args:
@@ -61,7 +61,7 @@ class SMSGraph:
         # (id, type, upstream, downstream) is all that we need
         # ! Only returns all normal snodes
         # TODO: Extract and make good use of Scope and Aggregation Scope info.
-        return {
+        return NodeSet(nodes={
             node.node_id: SNode(
                 node.node_id,
                 node.type,
@@ -70,4 +70,4 @@ class SMSGraph:
             )
             for node in node_map.values()
             if node.type not in SMSGraph.non_normal_node_type
-        }
+        })

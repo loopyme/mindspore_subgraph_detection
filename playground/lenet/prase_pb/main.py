@@ -39,4 +39,6 @@ make_tuple                           17  ['16', '15', 'P']  []            []    
 -----------------------------------  --  -----------------  ------------  ------  --
 """
 
-SMSGraph(graph)
+g = SMSGraph(graph)
+for i in g.node_set:
+    print(i)
