@@ -4,7 +4,7 @@ from mindinsight.datavisual.common.log import logger
 from mindinsight.datavisual.data_transform.graph import MSGraph
 
 from DataStucture.SimpleMindsporeGraph.smsgraph import SMSGraph
-from detect_subgraph.prase_pb_file import phase_pb_file
+from PrasePBFile import phase_pb_file
 from playground.help import print_table
 from playground.lenet.prase_pb import get_nodes_info
 
