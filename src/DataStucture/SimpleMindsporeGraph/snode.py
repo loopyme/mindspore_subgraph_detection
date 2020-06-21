@@ -1,25 +1,19 @@
 """This file is used to define node in the simplified MindSpore graph."""
+
+from dataclasses import dataclass
 from typing import Tuple
 
-from mindinsight.datavisual.data_transform.graph import NodeTypeEnum
 
-
+@dataclass(init=True, order=True, eq=True, frozen=True)
 class SNode:
-    def __init__(
-            self,
-            MSGraph_id: int,
-            type: NodeTypeEnum,
-            upstream: Tuple[int],
-            downstream: Tuple[int],
-    ):
-        self.MSGraph_id = MSGraph_id
-        self.type = type
-        self.upstream = upstream
-        self.downstream = downstream
+    val: int
+    type: str
+    upstream: Tuple[int]
+    downstream: Tuple[int]
 
     @property
     def id(self):
-        return self.MSGraph_id
+        return self.val
 
-    def __str__(self):
-        return f'Node-{self.MSGraph_id} {self.type}'
+    def __repr__(self):
+        return f"Node-{self.val} {self.type}"
