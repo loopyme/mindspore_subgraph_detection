@@ -1,12 +1,12 @@
 """This file is used to define node set in the simplified MindSpore graph."""
 from collections import deque
-from typing import Tuple, Set, Deque
+from typing import Tuple, Set
 
 from DataStucture.SimpleMindsporeGraph.snode import SNode
-from config import SAFE_MODE
+from DataStucture.Subgraph.subgraph import Subgraph
 
 
-class SubgraphCore:
+class SubgraphCore(Subgraph):
     """Mainly used for the collection control in subgraph core growing"""
 
     def __init__(self, nodes: Tuple[SNode] = None):
@@ -19,28 +19,19 @@ class SubgraphCore:
         if nodes is None:
             # return null obj
             return
-        if SAFE_MODE and not all([n.type == nodes[0].type for n in nodes]):
-            raise ValueError("Subgraph Core Nodes should be in the same pattern")
 
-        # The pattern of the subgraph, correspond to the nodes
-        self.pattern: Deque[str] = deque[nodes[0].type]
-
-        # Nodes the make up the subgraph, each tuple hold one place in the pattern
-        self.nodes: Deque[Tuple[SNode]] = deque[nodes]
+        super().__init__(
+            pattern=deque[nodes[0].type],
+            nodes=deque[nodes],
+            min_node_id=min(nodes),
+            min_node_index=(0, nodes.index(self.min_node_id)),
+        )
 
         # Holds the index of all the boundary pattern items, only these items will be traversed
         self.boundary_pattern_index: Set[int] = set(range(len(self.pattern)))
 
         # Iter of set boundary_pattern_index, useful when executing traversal
         self.pointer = None
-
-        # Unique id of SubgraphCore, used to avoid additional calculations
-        # Lazy computed with property-id
-        self._id: int = 0
-
-        # Record the minimum-id node info to speed up SubgraphCore id calculation
-        self.min_node_id = min(nodes)
-        self.min_node_index = (0, nodes.index(self.min_node_id))
 
     def __copy__(self):
         copy_obj = SubgraphCore()
@@ -51,21 +42,7 @@ class SubgraphCore:
         copy_obj._id = self.id
         copy_obj.min_node_id = self.min_node_id
         copy_obj.min_node_index = self.min_node_index
-
-    @property
-    def id(self):
-        """
-        Get a unique id of SubgraphCore
-
-        Returns: Hash of a string, which make up by the subgraph instance nodes that contains the smallest id node,
-            nodes are numbered in ascending order, and split by '-'
-
-        """
-        if self._id == 0:
-            self._id = hash(
-                "-".join(sorted(tup[self.min_node_index[1]] for tup in self.nodes))
-            )
-        return self._id
+        return copy_obj
 
     def __next__(self):
         return self.nodes[self.pointer.__next__()]
@@ -85,9 +62,6 @@ class SubgraphCore:
 
     def set_boundary(self, pattern_index: int):
         self.boundary_pattern_index.add(pattern_index)
-
-    def __getitem__(self, node_id: int):
-        return self.nodes[node_id]
 
     def grow(self, node_pattern: str, nodes: Tuple[SNode]):
         """
