@@ -20,11 +20,16 @@ class SubgraphCore(Subgraph):
             # return null obj
             return
 
+        core_pattern = deque()
+        core_pattern.append(nodes[0].type)
+        core_nodes = deque()
+        core_nodes.append(nodes)
+
         super().__init__(
-            pattern=deque[nodes[0].type],
-            nodes=deque[nodes],
+            pattern=core_pattern,
+            nodes=core_nodes,
             min_node_id=min(nodes),
-            min_node_index=(0, nodes.index(self.min_node_id)),
+            min_node_index=(0, nodes.index(min(nodes))),
         )
 
         # Holds the index of all the boundary pattern items, only these items will be traversed
@@ -45,15 +50,23 @@ class SubgraphCore(Subgraph):
         return copy_obj
 
     def __next__(self):
+        """
+        Traverse to get the equivalent-nodes-tuple in subgraph instance
+
+        Notes:
+            only these nodes whose id in boundary_nodes will be traversed
+        Returns:
+            equivalent_nodes tuple
+        """
         return self.nodes[self.pointer.__next__()]
 
     def __iter__(self):
-        # only these nodes whose id in boundary_nodes will be traversed
-        self.pointer = self.boundary_pattern_index.__iter__()
-        return self
+        """
+        Get a iter of the equivalent nodes in subgraph instance
 
-    def get_iter_of_all(self):
-        # force to a iter of all nodes
+        Returns:
+            self
+        """
         self.pointer = self.boundary_pattern_index.__iter__()
         return self
 
@@ -87,3 +100,6 @@ class SubgraphCore(Subgraph):
         if new_min_node_id < self.min_node_id:
             self.min_node_id = new_min_node_id
             self.min_node_index = (len(self.pattern) - 1, nodes.index(self.min_node_id))
+
+    def __contains__(self, node: SNode):
+        return any([node in pattern_nodes for pattern_nodes in self.nodes])

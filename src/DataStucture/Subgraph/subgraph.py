@@ -1,4 +1,4 @@
-"""This file is used to define node set in the simplified MindSpore graph."""
+"""This file is used to define subgraph in the simplified MindSpore graph."""
 from typing import Tuple, Deque
 
 from DataStucture.SimpleMindsporeGraph.snode import SNode
@@ -6,7 +6,7 @@ from config import SAFE_MODE
 
 
 class Subgraph:
-    """The subgraph: Different from SMSGraph, it is organized to improve performance"""
+    """The subgraph: Not a subclass of SMSGraph, organized to improve performance"""
 
     def __init__(self, pattern, nodes, min_node_id, min_node_index):
         """
@@ -19,7 +19,7 @@ class Subgraph:
             min_node_index: The index of least id node
 
         Notes:
-            Here is an example, suppose we have a subgraph with two instance:
+            Here is an example: suppose we have a subgraph with two instance:
                 - Node1(biaAdd)->Node2(Conv2D)
                 - Node3(biaAdd)->Node4(Conv2D)
             Then the member variables should be:
@@ -29,18 +29,16 @@ class Subgraph:
                 - min_node_index    : (0,0)
                 - id                : hash('1-2')
         """
-
         # check if subgraph is valid
         if SAFE_MODE and not all(
-                [all([n[i].type == pattern[i] for n in nodes] for i in range(len(pattern)))]
+                [all([n[i].type == pattern[i] for n in nodes]) for i in range(len(pattern))]
         ):
             raise ValueError("Subgraph Nodes should be in the same pattern")
 
         # The pattern of the subgraph, correspond to the nodes
         self.pattern: Deque[str] = pattern
 
-        # Nodes the make up the subgraph, each tuple hold one place in the pattern
-        # for example, if node-12 and node-34 are both biaAdd, pattern = ['biaAdd'],nodes = [(node-12,node-34)]
+        # Nodes that make up the subgraph, each tuple hold one place in the pattern
         self.nodes: Deque[Tuple[SNode]] = nodes
 
         # Unique id of SubgraphCore, used to avoid additional calculations
