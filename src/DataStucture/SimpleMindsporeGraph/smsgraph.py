@@ -62,11 +62,11 @@ class SMSGraph:
                 return int(node.node_id)
 
         # (id, type, upstream, downstream) is all that we need
-        # ! Only returns all normal snodes
+        # ! Scope and Aggregation Scope snodes will not be returned
         # TODO: Extract and make good use of Scope and Aggregation Scope info.
-        return {
-            node.node_id: SNode(
-                node.node_id,
+        res = {
+            int(node.node_id): SNode(
+                int(node.node_id),
                 node.type,
                 tuple(map(get_node_id, node.input.keys())),
                 tuple(map(get_node_id, node.output.keys())),
@@ -74,6 +74,13 @@ class SMSGraph:
             for node in node_map.values()
             if node.type not in SMSGraph.non_normal_node_type
         }
+        res.update(
+            {
+                -1: SNode(-1, "PARAMETER", tuple(), tuple()),
+                -2: SNode(-2, "CONST", tuple(), tuple()),
+            }
+        )
+        return res
 
     def node_count(self) -> Deque[Tuple[SNode]]:
         """
@@ -107,3 +114,6 @@ class SMSGraph:
         if len(node_buffer) >= MIN_SUBGRAPH_NODE_NUMBER:
             count_res.append(tuple(node_buffer))
         return count_res
+
+    def __getitem__(self, node_id: int) -> SNode:
+        return self.node_set[node_id]

@@ -1,6 +1,6 @@
 """This file is used to define node set in the simplified MindSpore graph."""
 from collections import deque
-from typing import Tuple, Set
+from typing import Tuple, Set, Deque, Union
 
 from DataStucture.SimpleMindsporeGraph.snode import SNode
 from DataStucture.Subgraph.subgraph import Subgraph
@@ -9,7 +9,7 @@ from DataStucture.Subgraph.subgraph import Subgraph
 class SubgraphCore(Subgraph):
     """Mainly used for the collection control in subgraph core growing"""
 
-    def __init__(self, nodes: Tuple[SNode] = None):
+    def __init__(self, nodes: Union[Tuple[SNode], None]):
         """
         Init a SubgraphCore with a tuple of Snode.
 
@@ -22,14 +22,13 @@ class SubgraphCore(Subgraph):
 
         core_pattern = deque()
         core_pattern.append(nodes[0].type)
-        core_nodes = deque()
-        core_nodes.append(nodes)
+        core_nodes = [deque((n,)) for n in nodes]
 
         super().__init__(
             pattern=core_pattern,
             nodes=core_nodes,
-            min_node_id=min(nodes),
-            min_node_index=(0, nodes.index(min(nodes))),
+            min_node=min(nodes),
+            min_node_index=nodes.index(min(nodes)),
         )
 
         # Holds the index of all the boundary pattern items, only these items will be traversed
@@ -38,18 +37,7 @@ class SubgraphCore(Subgraph):
         # Iter of set boundary_pattern_index, useful when executing traversal
         self.pointer = None
 
-    def __copy__(self):
-        copy_obj = SubgraphCore()
-        copy_obj.pattern = self.pattern.copy()
-        copy_obj.nodes = self.nodes.copy()
-        copy_obj.boundary_pattern_index = self.boundary_pattern_index.copy()
-        copy_obj.pointer = None
-        copy_obj._id = self.id
-        copy_obj.min_node_id = self.min_node_id
-        copy_obj.min_node_index = self.min_node_index
-        return copy_obj
-
-    def __next__(self):
+    def __next__(self) -> Tuple:
         """
         Traverse to get the equivalent-nodes-tuple in subgraph instance
 
@@ -58,7 +46,8 @@ class SubgraphCore(Subgraph):
         Returns:
             equivalent_nodes tuple
         """
-        return self.nodes[self.pointer.__next__()]
+        index = self.pointer.__next__()
+        return tuple(n[index] for n in self.nodes)
 
     def __iter__(self):
         """
@@ -76,30 +65,44 @@ class SubgraphCore(Subgraph):
     def set_boundary(self, pattern_index: int):
         self.boundary_pattern_index.add(pattern_index)
 
-    def grow(self, node_pattern: str, nodes: Tuple[SNode]):
-        """
-        Make the core grow
+    def grow(
+            self,
+            node_pattern: Deque[str],
+            grow_nodes: Deque[Deque[SNode]],
+            keep_instance_index: Tuple[int],
+    ):
+        """"""
+        # TODO:check if node_pattern, grow_nodes, keep_instance_index is valid
 
-        Args:
-            node_pattern: what type of node are growed
-            nodes: growed nodes
+        # do some copy
+        new_core = SubgraphCore(nodes=None)
+        new_core.pattern = self.pattern.copy() + node_pattern
 
-        Returns: None
-        """
+        # update the nodes and boundary patterns
+        new_core.nodes = [
+            self.nodes[index] + deque(grow_nodes[i])
+            for i, index in enumerate(keep_instance_index)
+        ]
 
-        # add the node_pattern and nodes
-        self.pattern.append(node_pattern)
-        self.nodes.append(nodes)
-        self.set_boundary(len(self.pattern))
+        # mark the boundary(undetected) pattern
+        new_core.boundary_pattern_index = {len(new_core.pattern)}
 
-        # clear the id cache
-        self._id = 0
+        # clear the pointer and _id
+        new_core.pointer = None
+        new_core._id = 0
+
+        # update the min_node info
+        new_core.min_node = self.min_node
+        new_core.min_node_index = self.min_node_index
 
         # update the minimum-id node info
-        new_min_node_id = min(nodes)
-        if new_min_node_id < self.min_node_id:
-            self.min_node_id = new_min_node_id
-            self.min_node_index = (len(self.pattern) - 1, nodes.index(self.min_node_id))
+        new_min_node_in_instance = tuple(min(n) for n in grow_nodes)
+        new_min_node = min(new_min_node_in_instance)
+        if new_min_node < new_core.min_node:
+            new_core.min_node = new_min_node
+            new_core.min_node_index = new_min_node_in_instance.index(new_min_node)
+
+        return new_core
 
     def __contains__(self, node: SNode):
         return any([node in pattern_nodes for pattern_nodes in self.nodes])

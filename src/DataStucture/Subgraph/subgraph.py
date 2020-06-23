@@ -1,5 +1,5 @@
 """This file is used to define subgraph in the simplified MindSpore graph."""
-from typing import Tuple, Deque
+from typing import Deque, List
 
 from DataStucture.SimpleMindsporeGraph.snode import SNode
 from config import SAFE_MODE
@@ -8,14 +8,14 @@ from config import SAFE_MODE
 class Subgraph:
     """The subgraph: Not a subclass of SMSGraph, organized to improve performance"""
 
-    def __init__(self, pattern, nodes, min_node_id, min_node_index):
+    def __init__(self, pattern, nodes, min_node, min_node_index):
         """
         Init a Subgraph with pattern,nodes,and min id nodes info
 
         Args:
             pattern: The pattern of the subgraph, correspond to the nodes
             nodes: Nodes the make up the subgraph, each tuple hold one place in the pattern
-            min_node_id: The id of least id node
+            min_node: The least id node
             min_node_index: The index of least id node
 
         Notes:
@@ -24,14 +24,14 @@ class Subgraph:
                 - Node3(biaAdd)->Node4(Conv2D)
             Then the member variables should be:
                 - pattern           : ['biaAdd', 'Conv2D']
-                - nodes             : [ (1,3)  , (2,4)   ]
-                - min_node_id       : 1
+                - nodes             : [ (1,2)  , (3,4)   ]
+                - min_node_id       : Node-1
                 - min_node_index    : (0,0)
                 - id                : hash('1-2')
         """
-        # check if subgraph is valid
+        # check if every subgraph instance is in the same pattern
         if SAFE_MODE and not all(
-                [all([n[i].type == pattern[i] for n in nodes]) for i in range(len(pattern))]
+                [all([n[j].type == t for j, t in enumerate(pattern)]) for n in nodes]
         ):
             raise ValueError("Subgraph Nodes should be in the same pattern")
 
@@ -39,7 +39,7 @@ class Subgraph:
         self.pattern: Deque[str] = pattern
 
         # Nodes that make up the subgraph, each tuple hold one place in the pattern
-        self.nodes: Deque[Tuple[SNode]] = nodes
+        self.nodes: List[Deque[SNode]] = nodes
 
         # Unique id of SubgraphCore, used to avoid additional calculations
         # Lazy computed with property-id
@@ -47,7 +47,7 @@ class Subgraph:
 
         # Record the minimum-id node info to speed up SubgraphCore id calculation
         # Incremental updated
-        self.min_node_id = min_node_id
+        self.min_node = min_node
         self.min_node_index = min_node_index
 
     @property
@@ -57,13 +57,14 @@ class Subgraph:
 
         Returns: Hash of a string, which make up by the subgraph instance nodes that contains the smallest id node,
             nodes are numbered in ascending order, and split by '-'
-
         """
         if self._id == 0:
             self._id = hash(
-                "-".join(sorted(tup[self.min_node_index[1]] for tup in self.nodes))
+                "-".join(
+                    [str(node.id) for node in sorted(self.nodes[self.min_node_index])]
+                )
             )
         return self._id
 
-    def __getitem__(self, node_id: int):
-        return self.nodes[node_id]
+    def __getitem__(self, instance_id: int):
+        return self.nodes[instance_id]
