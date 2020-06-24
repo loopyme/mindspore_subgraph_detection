@@ -1,3 +1,4 @@
+"""This file is used to define the executor of subgraph detection process"""
 from collections import deque
 from concurrent.futures import as_completed
 from concurrent.futures.thread import ThreadPoolExecutor
@@ -9,11 +10,9 @@ from typing import Tuple, Set, Union, Deque
 
 from mindinsight.datavisual.data_transform.graph import MSGraph
 
-from DataStucture.SimpleMindsporeGraph.smsgraph import SMSGraph
-from DataStucture.Subgraph.subgraph import Subgraph
-from DataStucture.Subgraph.subgraphcore import SubgraphCore
-from SubgraphDetection.grow import core_grow
-from config import MAX_WORKER
+from SubgraphDetection.Core.grow import core_grow
+from SubgraphDetection.DataStucture import SMSGraph, SubgraphCore, Subgraph
+from SubgraphDetection.config import MAX_WORKER
 
 
 class Executor:
@@ -106,4 +105,11 @@ class Executor:
         return tuple(res)
 
     def commit_core(self, core: SubgraphCore):
+        """
+        Let subgraph core commit itself to subgraph.
+        Args:
+            core: subgraph core which is finish growing
+
+        Returns:None
+        """
         self._commit_subgraph.append(core)

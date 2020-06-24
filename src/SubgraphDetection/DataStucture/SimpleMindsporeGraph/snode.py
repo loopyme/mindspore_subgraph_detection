@@ -1,4 +1,4 @@
-"""This file is used to define node in the simplified MindSpore graph."""
+"""This file is used to define nodes in the simplified MindSpore graph."""
 
 from dataclasses import dataclass
 from typing import Tuple

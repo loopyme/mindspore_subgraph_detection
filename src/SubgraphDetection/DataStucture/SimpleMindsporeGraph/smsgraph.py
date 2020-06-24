@@ -5,8 +5,8 @@ from typing import Dict, List, Tuple, Deque
 from mindinsight.datavisual.data_transform.graph import MSGraph
 from mindinsight.datavisual.data_transform.graph.node import Node, NodeTypeEnum
 
-from DataStucture.SimpleMindsporeGraph.snode import SNode
-from config import MIN_SUBGRAPH_INSTANCE_NUMBER
+from SubgraphDetection.DataStucture.SimpleMindsporeGraph.snode import SNode
+from SubgraphDetection.config import MIN_SUBGRAPH_INSTANCE_NUMBER
 
 
 class SMSGraph:

@@ -1,13 +1,12 @@
-"""This file is used to define node set in the simplified MindSpore graph."""
+"""This file is used to define subgraph core in the simplified MindSpore graph."""
 from collections import deque
 from typing import Tuple, Set, Deque, Union
 
-from DataStucture.SimpleMindsporeGraph.snode import SNode
-from DataStucture.Subgraph.subgraph import Subgraph
+from SubgraphDetection.DataStucture import SNode, Subgraph
 
 
 class SubgraphCore(Subgraph):
-    """Mainly used for the collection control in subgraph core growing"""
+    """The growing core of subgraph"""
 
     def __init__(self, nodes: Union[Tuple[SNode], None]):
         """
@@ -71,7 +70,17 @@ class SubgraphCore(Subgraph):
             grow_nodes: Deque[Deque[SNode]],
             keep_instance_index: Tuple[int],
     ):
-        """"""
+        """
+        Let the core grow
+
+        Args:
+            node_pattern: The type of new nodes
+            grow_nodes: The new nodes
+            keep_instance_index: Which instances is going to keep
+
+        Returns:
+            The new core grow from self
+        """
         # TODO:check if node_pattern, grow_nodes, keep_instance_index is valid
 
         # do some copy
@@ -110,6 +119,11 @@ class SubgraphCore(Subgraph):
         return any([node in pattern_nodes for pattern_nodes in self.nodes])
 
     def commit(self):
+        """
+        Commit the core after finishing the growing
+
+        Returns: None
+        """
         del self.pointer
         del self.boundary_pattern_index
         del self.min_node

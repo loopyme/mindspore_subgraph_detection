@@ -1,6 +1,5 @@
-from DumpResult import dump_result
-from PrasePBFile import phase_pb_file
-from SubgraphDetection.Executor import Executor
+from SubgraphDetection.Core.executor import Executor
+from SubgraphDetection.Util import dump_result, phase_pb_file
 
 
 def detect_subgraph(graph_path, result_path):

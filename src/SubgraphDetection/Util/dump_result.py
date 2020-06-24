@@ -4,19 +4,18 @@ from typing import Deque
 
 from mindinsight.datavisual.common.log import logger
 
-from DataStucture.Subgraph.subgraph import Subgraph
-from DataStucture.Subgraph.subgraphcore import SubgraphCore
+from SubgraphDetection.DataStucture import Subgraph, SubgraphCore
 
 
 def dump_result(subgraph_deque: Deque[Subgraph], file_path: str):
     """
+    Dump the result to file
 
     Args:
-        subgraph_deque:
-        file_path:
+        subgraph_deque: A deque of Subgraphs
+        file_path: Where should we save the result
 
-    Returns:
-
+    Returns:None
     """
 
     class JsonEncoder(json.JSONEncoder):
@@ -29,8 +28,8 @@ def dump_result(subgraph_deque: Deque[Subgraph], file_path: str):
                 return self.default(o.nodes)
             return str(o)
 
-    logger.info("Start to load graph from pb file, file path: %s.", file_path)
+    logger.info("Start to dump subgraph detecting result to file, file path: %s.", file_path)
     with open(file_path, "w") as f:
         f.write(json.dumps(subgraph_deque, indent=4, cls=JsonEncoder))
 
-    logger.info("Build graph success, file path: %s.", file_path)
+    logger.info("Write subgraph file success, file path: %s.", file_path)

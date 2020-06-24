@@ -1,9 +1,11 @@
+"""This file implement the core grow logic"""
+# TODO: rewrite in cython
 from collections import deque, Counter
 from typing import Tuple
 
-from DataStucture.SimpleMindsporeGraph.snode import SNode
-from DataStucture.Subgraph.subgraphcore import SubgraphCore
-from config import MIN_SUBGRAPH_INSTANCE_NUMBER, MIN_SUBGRAPH_NODE_NUMBER
+from SubgraphDetection.DataStucture import SNode
+from SubgraphDetection.DataStucture import SubgraphCore
+from SubgraphDetection.config import MIN_SUBGRAPH_INSTANCE_NUMBER, MIN_SUBGRAPH_NODE_NUMBER
 
 
 def core_grow(executor, core: SubgraphCore) -> deque:
@@ -18,7 +20,6 @@ def core_grow(executor, core: SubgraphCore) -> deque:
         A tuple of new cores, grow from the input one
     """
 
-    # TODO: rewrite in cython
     def _check_stream_on_one_position(stream_nodes):
         # count the common neighbor type
         neighbor_type = tuple(

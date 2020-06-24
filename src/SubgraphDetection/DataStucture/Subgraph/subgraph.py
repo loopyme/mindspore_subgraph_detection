@@ -1,8 +1,8 @@
 """This file is used to define subgraph in the simplified MindSpore graph."""
 from typing import Deque, List
 
-from DataStucture.SimpleMindsporeGraph.snode import SNode
-from config import SAFE_MODE
+from SubgraphDetection.DataStucture import SNode
+from SubgraphDetection.config import SAFE_MODE
 
 
 class Subgraph:
@@ -31,7 +31,7 @@ class Subgraph:
         """
         # check if every subgraph instance is in the same pattern
         if SAFE_MODE and not all(
-            [all([n[j].type == t for j, t in enumerate(pattern)]) for n in nodes]
+                [all([n[j].type == t for j, t in enumerate(pattern)]) for n in nodes]
         ):
             raise ValueError("Subgraph Nodes should be in the same pattern")
 
