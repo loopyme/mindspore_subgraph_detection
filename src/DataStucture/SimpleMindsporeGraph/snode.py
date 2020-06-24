@@ -23,4 +23,7 @@ class SNode:
         return self.id == other.id
 
     def __repr__(self):
-        return f"Node-{self.id} {self.type}"
+        if self.id > 0:
+            return f"Node-{self.id} {self.type}"
+        else:
+            return f"Node {self.type}"

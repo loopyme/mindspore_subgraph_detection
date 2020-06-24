@@ -85,7 +85,9 @@ class SubgraphCore(Subgraph):
         ]
 
         # mark the boundary(undetected) pattern
-        new_core.boundary_pattern_index = {len(new_core.pattern)}
+        new_core.boundary_pattern_index = set(
+            range(len(self.pattern), len(new_core.pattern))
+        )
 
         # clear the pointer and _id
         new_core.pointer = None
@@ -106,3 +108,10 @@ class SubgraphCore(Subgraph):
 
     def __contains__(self, node: SNode):
         return any([node in pattern_nodes for pattern_nodes in self.nodes])
+
+    def commit(self):
+        del self.pointer
+        del self.boundary_pattern_index
+        del self.min_node
+        del self.min_node_index
+        return self

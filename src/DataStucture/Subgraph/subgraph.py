@@ -31,7 +31,7 @@ class Subgraph:
         """
         # check if every subgraph instance is in the same pattern
         if SAFE_MODE and not all(
-                [all([n[j].type == t for j, t in enumerate(pattern)]) for n in nodes]
+            [all([n[j].type == t for j, t in enumerate(pattern)]) for n in nodes]
         ):
             raise ValueError("Subgraph Nodes should be in the same pattern")
 
@@ -68,3 +68,6 @@ class Subgraph:
 
     def __getitem__(self, instance_id: int):
         return self.nodes[instance_id]
+
+    def __repr__(self):
+        return str(self.nodes)

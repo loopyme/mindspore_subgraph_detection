@@ -5,7 +5,9 @@ from functools import reduce
 from operator import __add__
 from os import cpu_count
 from threading import Lock
-from typing import Tuple, Set
+from typing import Tuple, Set, Union, Deque
+
+from mindinsight.datavisual.data_transform.graph import MSGraph
 
 from DataStucture.SimpleMindsporeGraph.smsgraph import SMSGraph
 from DataStucture.Subgraph.subgraph import Subgraph
@@ -15,9 +17,22 @@ from config import MAX_WORKER
 
 
 class Executor:
-    def __init__(self, graph: SMSGraph):
-        # store the whole graph
-        self.graph: SMSGraph = graph
+    def __init__(self, graph: Union[SMSGraph, MSGraph]):
+        """
+        init a subgraph detect executor
+        Args:
+            graph: The whole graph which executor working on
+        """
+        # check and store the whole graph
+        if isinstance(graph, MSGraph):
+            self.graph: SMSGraph = SMSGraph(graph)
+        elif isinstance(graph, SMSGraph):
+            self.graph: SMSGraph = graph
+        else:
+            raise ValueError(
+                f'The subgraph detection executor obtains an unrecognized graph input of type "{type(graph)}",'
+                f" which should be SMSGraph or MSGraph"
+            )
 
         # muti-thread executor
         self.executor: ThreadPoolExecutor = ThreadPoolExecutor(
@@ -28,15 +43,20 @@ class Executor:
         self.lock: Lock = Lock()
 
         # all of the detected cores
-        self._registered_core: Set[Subgraph] = set()
+        self._registered_core: Set[int] = set()
 
         # cores that waiting for grow
-        self._core_deque = deque(map(SubgraphCore, self.graph.node_count()))
+        self._core_deque: Deque[SubgraphCore] = deque(
+            map(SubgraphCore, self.graph.node_count())
+        )
 
         # all of the detected graphs
-        self._commit_subgraph = deque()
+        self._commit_subgraph: Deque[Subgraph] = deque()
 
-    def run(self):
+    def get_subgraph(self) -> Deque[Subgraph]:
+        return self._commit_subgraph
+
+    def run(self) -> Deque[Subgraph]:
         """
         Run until every subgraph core is committed or destroyed
 
@@ -45,10 +65,10 @@ class Executor:
         """
         while self._core_deque:
             self.next_epoch()
-        return self._commit_subgraph
+        return self.get_subgraph()
 
     def next_epoch(self):
-        """Make all core in core_deque grow to next epoch and update the core_deque"""
+        """Let all cores in core_deque grow to next epoch and update the core_deque"""
         self._core_deque = reduce(
             __add__,
             (
@@ -67,8 +87,8 @@ class Executor:
         Register the cores to avoid extra computation.
 
         Notes:
-            If a core is registered, means it is already computed or added to next epoch core deque.
-            This should be a exclusive function, make sure to acquire the lock before.
+            If a core is registered, means it is already been computed or added to next epoch core deque.
+            This function should be exclusive, make sure to acquire the lock before.
 
         Args:
             core_ids:   Tuple of core ids that should be checked
@@ -85,5 +105,5 @@ class Executor:
                 self._registered_core.add(cid)
         return tuple(res)
 
-    def commit_core(self, core):
+    def commit_core(self, core: SubgraphCore):
         self._commit_subgraph.append(core)

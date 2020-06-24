@@ -24,7 +24,9 @@ def phase_pb_file(file_path: str) -> Union[MSGraph, None]:
     try:
         model_proto.ParseFromString(FileHandler(file_path).read())
     except ParseError:
-        logger.warning("The given file is not a valid pb file, file path: %s.", file_path)
+        logger.warning(
+            "The given file is not a valid pb file, file path: %s.", file_path
+        )
         return None
 
     graph = MSGraph()

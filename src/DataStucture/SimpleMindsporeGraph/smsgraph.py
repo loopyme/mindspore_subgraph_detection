@@ -6,7 +6,7 @@ from mindinsight.datavisual.data_transform.graph import MSGraph
 from mindinsight.datavisual.data_transform.graph.node import Node, NodeTypeEnum
 
 from DataStucture.SimpleMindsporeGraph.snode import SNode
-from config import MIN_SUBGRAPH_NODE_NUMBER
+from config import MIN_SUBGRAPH_INSTANCE_NUMBER
 
 
 class SMSGraph:
@@ -104,14 +104,14 @@ class SMSGraph:
             if n[1].type != temp_type:
                 # different type from later one
                 temp_type = n[1].type
-                if len(node_buffer) >= MIN_SUBGRAPH_NODE_NUMBER:
+                if len(node_buffer) >= MIN_SUBGRAPH_INSTANCE_NUMBER:
                     count_res.append(tuple(node_buffer))
 
                 node_buffer.clear()
             node_buffer.append(n[1])
 
         # check the remaining ones
-        if len(node_buffer) >= MIN_SUBGRAPH_NODE_NUMBER:
+        if len(node_buffer) >= MIN_SUBGRAPH_INSTANCE_NUMBER:
             count_res.append(tuple(node_buffer))
         return count_res
 
