@@ -3,6 +3,7 @@ from collections import deque
 from typing import Tuple, Set, Deque, Union
 
 from SubgraphDetection.DataStucture import SNode, Subgraph
+from SubgraphDetection.config import MIN_SUBGRAPH_INSTANCE_NUMBER, MIN_SUBGRAPH_NODE_NUMBER
 
 
 class SubgraphCore(Subgraph):
@@ -31,10 +32,10 @@ class SubgraphCore(Subgraph):
         )
 
         # Holds the index of all the boundary pattern items, only these items will be traversed
-        self.boundary_pattern_index: Set[int] = set(range(len(self.pattern)))
+        self.__boundary_pattern_index: Set[int] = set(range(len(self._pattern)))
 
         # Iter of set boundary_pattern_index, useful when executing traversal
-        self.pointer = None
+        self.__pointer = None
 
     def __next__(self) -> Tuple:
         """
@@ -45,8 +46,8 @@ class SubgraphCore(Subgraph):
         Returns:
             equivalent_nodes tuple
         """
-        index = self.pointer.__next__()
-        return tuple(n[index] for n in self.nodes)
+        index = self.__pointer.__next__()
+        return tuple(n[index] for n in self._nodes)
 
     def __iter__(self):
         """
@@ -55,14 +56,14 @@ class SubgraphCore(Subgraph):
         Returns:
             self
         """
-        self.pointer = self.boundary_pattern_index.__iter__()
+        self.__pointer = self.__boundary_pattern_index.__iter__()
         return self
 
     def set_interior(self, pattern_index: int):
-        self.boundary_pattern_index.remove(pattern_index)
+        self.__boundary_pattern_index.remove(pattern_index)
 
     def set_boundary(self, pattern_index: int):
-        self.boundary_pattern_index.add(pattern_index)
+        self.__boundary_pattern_index.add(pattern_index)
 
     def grow(
             self,
@@ -85,47 +86,51 @@ class SubgraphCore(Subgraph):
 
         # do some copy
         new_core = SubgraphCore(nodes=None)
-        new_core.pattern = self.pattern.copy() + node_pattern
+        new_core._pattern = self._pattern.copy() + node_pattern
 
         # update the nodes and boundary patterns
-        new_core.nodes = [
-            self.nodes[index] + deque(grow_nodes[i])
+        new_core._nodes = [
+            self._nodes[index] + deque(grow_nodes[i])
             for i, index in enumerate(keep_instance_index)
         ]
 
         # mark the boundary(undetected) pattern
-        new_core.boundary_pattern_index = set(
-            range(len(self.pattern), len(new_core.pattern))
+        new_core.__boundary_pattern_index = set(
+            range(len(self._pattern), len(new_core._pattern))
         )
 
         # clear the pointer and _id
-        new_core.pointer = None
+        new_core.__pointer = None
         new_core._id = 0
 
         # update the min_node info
-        new_core.min_node = self.min_node
-        new_core.min_node_index = self.min_node_index
+        new_core._min_node = self._min_node
+        new_core._min_node_index = self._min_node_index
 
         # update the minimum-id node info
         new_min_node_in_instance = tuple(min(n) for n in grow_nodes)
         new_min_node = min(new_min_node_in_instance)
-        if new_min_node < new_core.min_node:
-            new_core.min_node = new_min_node
-            new_core.min_node_index = new_min_node_in_instance.index(new_min_node)
+        if new_min_node < new_core._min_node:
+            new_core._min_node = new_min_node
+            new_core._min_node_index = new_min_node_in_instance.index(new_min_node)
 
         return new_core
 
     def __contains__(self, node: SNode):
-        return any([node in pattern_nodes for pattern_nodes in self.nodes])
+        return any([node in pattern_nodes for pattern_nodes in self._nodes])
+
+    @property
+    def is_valid_for_commit(self):
+        return len(self._nodes) >= MIN_SUBGRAPH_INSTANCE_NUMBER and len(self._nodes[0]) >= MIN_SUBGRAPH_NODE_NUMBER
 
     def commit(self):
         """
-        Commit the core after finishing the growing
+        Commit the core after finish growing
 
-        Returns: None
+        Returns: self
         """
-        del self.pointer
-        del self.boundary_pattern_index
-        del self.min_node
-        del self.min_node_index
+        del self.__pointer
+        del self.__boundary_pattern_index
+        del self._min_node
+        del self._min_node_index
         return self

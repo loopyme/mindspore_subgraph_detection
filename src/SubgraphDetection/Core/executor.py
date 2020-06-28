@@ -34,7 +34,7 @@ class Executor:
             )
 
         # muti-thread executor
-        self.executor: ThreadPoolExecutor = ThreadPoolExecutor(
+        self._executor: ThreadPoolExecutor = ThreadPoolExecutor(
             max_workers=MAX_WORKER if MAX_WORKER > 0 else cpu_count()
         )
 
@@ -74,7 +74,7 @@ class Executor:
                 grow_core.result()
                 for grow_core in as_completed(
                 (
-                    self.executor.submit(core_grow, self, core)
+                    self._executor.submit(core_grow, self, core)
                     for core in self._core_deque
                 )
             )

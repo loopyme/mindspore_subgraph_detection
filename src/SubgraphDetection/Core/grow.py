@@ -5,7 +5,7 @@ from typing import Tuple
 
 from SubgraphDetection.DataStucture import SNode
 from SubgraphDetection.DataStucture import SubgraphCore
-from SubgraphDetection.config import MIN_SUBGRAPH_INSTANCE_NUMBER, MIN_SUBGRAPH_NODE_NUMBER
+from SubgraphDetection.config import MIN_SUBGRAPH_INSTANCE_NUMBER
 
 
 def core_grow(executor, core: SubgraphCore) -> deque:
@@ -71,8 +71,7 @@ def core_grow(executor, core: SubgraphCore) -> deque:
     # commit the graph core if no further graph possibilities
     if (
             len(new_cores) == 0
-            and len(core.nodes) >= MIN_SUBGRAPH_INSTANCE_NUMBER
-            and len(core.nodes[0]) >= MIN_SUBGRAPH_NODE_NUMBER
+            and core.is_valid_for_commit
     ):
         executor.commit_core(core.commit())
     else:

@@ -28,7 +28,7 @@ class SMSGraph:
         """
 
         # Used to store all snodes, and the key is node id, value is `SNode` object.
-        self.node_set: Dict[int, SNode] = SMSGraph.parse_MSGraph(graph)
+        self._node_set: Dict[int, SNode] = SMSGraph.parse_MSGraph(graph)
 
     @staticmethod
     def parse_MSGraph(msgraph: MSGraph) -> Dict[int, SNode]:
@@ -74,6 +74,8 @@ class SMSGraph:
             for node in node_map.values()
             if node.type not in SMSGraph.non_normal_node_type
         }
+
+        # Add PARAMETER&CONST nodes
         res.update(
             {
                 -1: SNode(-1, "PARAMETER", tuple(), tuple()),
@@ -85,7 +87,7 @@ class SMSGraph:
     def node_count(self) -> Deque[Tuple[SNode]]:
         """
         Count the nodes and return a deque of node tuples, which may be used to build subgraph core later
-        Those node whose occurrences less than MIN_SUBGRAPH_NODE_NUMBER will not returned
+        Those node whose occurrences less than MIN_SUBGRAPH_INSTANCE_NUMBER will not returned
 
         Returns:
             Each tuple contains same-type nodes
@@ -94,7 +96,7 @@ class SMSGraph:
 
         # sort node by type
         sorted_node_map: List[Tuple[str, SNode]] = sorted(
-            self.node_set.items(), key=lambda x: x[1].type, reverse=True
+            self._node_set.items(), key=lambda x: x[1].type, reverse=True
         )
 
         # count it
@@ -116,4 +118,4 @@ class SMSGraph:
         return count_res
 
     def __getitem__(self, node_id: int) -> SNode:
-        return self.node_set[node_id]
+        return self._node_set[node_id]

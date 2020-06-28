@@ -12,11 +12,11 @@ class SNode:
     downstream: Tuple[int]
 
     def __lt__(self, other):
-        # negative node-id should not lower than any normal nodes
+        # negative node-id (non-normal-type nodes) should not lower than any normal nodes
         return 0 < self.id < other.id
 
     def __gt__(self, other):
-        # negative node-id should larger than normal nodes
+        # negative node-id (non-normal-type nodes) should larger than normal nodes
         return self.id < 0 or self.id > other.id
 
     def __eq__(self, other):
