@@ -235,3 +235,6 @@ src/mindspore
 
 # playground data
 *ubyte
+
+# playground
+playground/
