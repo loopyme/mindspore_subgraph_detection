@@ -1,7 +1,7 @@
 """This file implement the core grow logic"""
 # TODO: rewrite in cython
 from collections import deque, Counter
-from typing import Tuple
+from typing import Tuple, Deque
 
 from SubgraphDetection.DataStucture import SNode
 from SubgraphDetection.DataStucture import SubgraphCore
@@ -13,7 +13,7 @@ def core_grow(executor, core: SubgraphCore) -> deque:
     Make one core grow to next epoch
 
     Args:
-        executor: The Executor Object, Locks and some other apis need to be invoked from it
+        executor: The Executor object, Locks and some other apis need to be invoked from it
         core: The core waiting for grow
 
     Returns:
@@ -48,7 +48,7 @@ def core_grow(executor, core: SubgraphCore) -> deque:
             if pattern != ""
         )
 
-    def _check_neighbors_on_one_position(nodes: Tuple[SNode]):
+    def _check_neighbors_on_one_position(nodes: Tuple[SNode, ...]):
         # find all possible upstream and downstream nodes
         upstream_nodes = tuple(
             tuple(executor.graph[node_id] for node_id in node.upstream)
@@ -64,7 +64,7 @@ def core_grow(executor, core: SubgraphCore) -> deque:
         )  # + _check_stream_on_one_position(downstream_nodes)
 
     # find and check the neighbors
-    new_cores = deque()
+    new_cores: Deque[SubgraphCore] = deque()
     for eq_node in core:
         new_cores += _check_neighbors_on_one_position(eq_node)
 
@@ -73,7 +73,7 @@ def core_grow(executor, core: SubgraphCore) -> deque:
             len(new_cores) == 0
             and core.is_valid_for_commit
     ):
-        executor.commit_core(core.commit())
+        executor.commit_core(core)
     else:
         # destroy the core
         del core

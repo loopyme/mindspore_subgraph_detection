@@ -9,7 +9,7 @@ from SubgraphDetection.config import MIN_SUBGRAPH_INSTANCE_NUMBER, MIN_SUBGRAPH_
 class SubgraphCore(Subgraph):
     """The growing core of subgraph"""
 
-    def __init__(self, nodes: Union[Tuple[SNode], None]):
+    def __init__(self, nodes: Union[Tuple[SNode, ...], None]):
         """
         Init a SubgraphCore with a tuple of Snode.
 
@@ -20,7 +20,7 @@ class SubgraphCore(Subgraph):
             # return null obj
             return
 
-        core_pattern = deque()
+        core_pattern: Deque[str] = deque()
         core_pattern.append(nodes[0].type)
         core_nodes = [deque((n,)) for n in nodes]
 
@@ -59,17 +59,11 @@ class SubgraphCore(Subgraph):
         self.__pointer = self.__boundary_pattern_index.__iter__()
         return self
 
-    def set_interior(self, pattern_index: int):
-        self.__boundary_pattern_index.remove(pattern_index)
-
-    def set_boundary(self, pattern_index: int):
-        self.__boundary_pattern_index.add(pattern_index)
-
     def grow(
             self,
             node_pattern: Deque[str],
             grow_nodes: Deque[Deque[SNode]],
-            keep_instance_index: Tuple[int],
+            keep_instance_index: Tuple[int, ...],
     ):
         """
         Let the core grow
@@ -115,9 +109,6 @@ class SubgraphCore(Subgraph):
             new_core._min_node_index = new_min_node_in_instance.index(new_min_node)
 
         return new_core
-
-    def __contains__(self, node: SNode):
-        return any([node in pattern_nodes for pattern_nodes in self._nodes])
 
     @property
     def is_valid_for_commit(self):

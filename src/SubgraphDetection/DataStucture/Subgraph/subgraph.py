@@ -66,12 +66,6 @@ class Subgraph:
             )
         return self._id
 
-    def __getitem__(self, instance_id: int):
-        return self._nodes[instance_id]
-
-    def __repr__(self):
-        return str(self._nodes)
-
     @property
     def nodes(self):
         return self._nodes

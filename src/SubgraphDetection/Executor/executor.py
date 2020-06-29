@@ -10,8 +10,8 @@ from typing import Tuple, Set, Union, Deque
 
 from mindinsight.datavisual.data_transform.graph import MSGraph
 
-from SubgraphDetection.Core.grow import core_grow
 from SubgraphDetection.DataStucture import SMSGraph, SubgraphCore, Subgraph
+from SubgraphDetection.Executor.grow import core_grow
 from SubgraphDetection.config import MAX_WORKER
 
 
@@ -81,7 +81,7 @@ class Executor:
             ),
         )
 
-    def register_core(self, core_ids: Tuple[int]) -> Tuple[bool]:
+    def register_core(self, core_ids: Tuple[int, ...]) -> Tuple[bool, ...]:
         """
         Register the cores to avoid extra computation.
 
@@ -112,4 +112,5 @@ class Executor:
 
         Returns:None
         """
+        core.commit()
         self._commit_subgraph.append(core)

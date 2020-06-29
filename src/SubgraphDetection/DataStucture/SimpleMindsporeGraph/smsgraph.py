@@ -84,7 +84,7 @@ class SMSGraph:
         )
         return res
 
-    def node_count(self) -> Deque[Tuple[SNode]]:
+    def node_count(self) -> Deque[Tuple[SNode, ...]]:
         """
         Count the nodes and return a deque of node tuples, which may be used to build subgraph core later
         Those node whose occurrences less than MIN_SUBGRAPH_INSTANCE_NUMBER will not returned
@@ -92,7 +92,7 @@ class SMSGraph:
         Returns:
             Each tuple contains same-type nodes
         """
-        count_res = deque()
+        count_res: Deque[Tuple[SNode, ...]] = deque()
 
         # sort node by type
         sorted_node_map: List[Tuple[str, SNode]] = sorted(
