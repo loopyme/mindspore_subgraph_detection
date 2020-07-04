@@ -1,14 +1,14 @@
 """This file is used to define subgraph in the simplified MindSpore graph."""
 from typing import Deque, List
 
-from SubgraphDetection.DataStucture import SNode
+from SubgraphDetection.DataStructure import SNode
 from SubgraphDetection.config import SAFE_MODE
 
 
 class Subgraph:
     """The subgraph: Not a subclass of SMSGraph, organized to improve performance"""
 
-    def __init__(self, pattern, nodes, min_node, min_node_index):
+    def __init__(self, pattern: Deque[str], nodes: List[Deque[SNode]], min_node: SNode, min_node_index: int):
         """
         Init a Subgraph with pattern,nodes,and min id nodes info
 
@@ -18,8 +18,8 @@ class Subgraph:
             min_node: The least id node
             min_node_index: The index of least id node
 
-        Notes:
-            Here is an example: suppose we have a subgraph with two instance:
+        Example:
+            suppose we have a subgraph with two instance:
                 - Node1(biaAdd)->Node2(Conv2D)
                 - Node3(biaAdd)->Node4(Conv2D)
             Then the member variables should be:
@@ -55,7 +55,8 @@ class Subgraph:
         """
         Get a unique id of a Subgraph
 
-        Returns: Hash of a string, which make up by the subgraph instance nodes that contains the smallest id node,
+        Returns:
+            Hash of a string, which make up by the subgraph instance nodes that contains the smallest id node,
             nodes are numbered in ascending order, and split by '-'
         """
         if self._id == 0:

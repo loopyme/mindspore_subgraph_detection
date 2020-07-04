@@ -2,7 +2,7 @@
 from collections import deque
 from typing import Tuple, Set, Deque, Union
 
-from SubgraphDetection.DataStucture import SNode, Subgraph
+from SubgraphDetection.DataStructure import SNode, Subgraph
 from SubgraphDetection.config import MIN_SUBGRAPH_INSTANCE_NUMBER, MIN_SUBGRAPH_NODE_NUMBER
 
 
@@ -43,8 +43,9 @@ class SubgraphCore(Subgraph):
 
         Notes:
             only these nodes whose id in boundary_nodes will be traversed
+
         Returns:
-            equivalent_nodes tuple
+            equivalent nodes tuple
         """
         index = self.__pointer.__next__()
         return tuple(n[index] for n in self._nodes)
@@ -112,13 +113,15 @@ class SubgraphCore(Subgraph):
 
     @property
     def is_valid_for_commit(self):
+        """Check whether if self is valid subgraph"""
         return len(self._nodes) >= MIN_SUBGRAPH_INSTANCE_NUMBER and len(self._nodes[0]) >= MIN_SUBGRAPH_NODE_NUMBER
 
     def commit(self):
         """
         Commit the core after finish growing
 
-        Returns: self
+        Returns:
+            self
         """
         del self.__pointer
         del self.__boundary_pattern_index

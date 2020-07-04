@@ -4,7 +4,7 @@ from typing import Deque
 
 from mindinsight.datavisual.common.log import logger
 
-from SubgraphDetection.DataStucture import Subgraph, SubgraphCore
+from SubgraphDetection.DataStructure import Subgraph, SubgraphCore
 
 
 def dump_result(subgraph_deque: Deque[Subgraph], file_path: str):
@@ -15,7 +15,8 @@ def dump_result(subgraph_deque: Deque[Subgraph], file_path: str):
         subgraph_deque: A deque of Subgraphs
         file_path: Where should we save the result
 
-    Returns:None
+    Returns:
+        None
     """
 
     class JsonEncoder(json.JSONEncoder):

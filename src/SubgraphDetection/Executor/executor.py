@@ -10,7 +10,7 @@ from typing import Tuple, Set, Union, Deque
 
 from mindinsight.datavisual.data_transform.graph import MSGraph
 
-from SubgraphDetection.DataStucture import SMSGraph, SubgraphCore, Subgraph
+from SubgraphDetection.DataStructure import SMSGraph, SubgraphCore, Subgraph
 from SubgraphDetection.Executor.grow import core_grow
 from SubgraphDetection.config import MAX_WORKER
 
@@ -107,10 +107,12 @@ class Executor:
     def commit_core(self, core: SubgraphCore):
         """
         Let subgraph core commit itself to subgraph.
+
         Args:
             core: subgraph core which is finish growing
 
-        Returns:None
+        Returns:
+            None
         """
         core.commit()
         self._commit_subgraph.append(core)

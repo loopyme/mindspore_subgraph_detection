@@ -5,12 +5,12 @@ from typing import Dict, List, Tuple, Deque
 from mindinsight.datavisual.data_transform.graph import MSGraph
 from mindinsight.datavisual.data_transform.graph.node import Node, NodeTypeEnum
 
-from SubgraphDetection.DataStucture.SimpleMindsporeGraph.snode import SNode
+from SubgraphDetection.DataStructure.SimpleMindsporeGraph.snode import SNode
 from SubgraphDetection.config import MIN_SUBGRAPH_INSTANCE_NUMBER
 
 
 class SMSGraph:
-    """The object describes the simplified MindSpore graph, and it is used for subgraph detection."""
+    """This object describes the simplified MindSpore graph, and it is used for subgraph detection."""
 
     non_normal_node_type = [
         NodeTypeEnum.NAME_SCOPE.value,
@@ -34,6 +34,7 @@ class SMSGraph:
     def parse_MSGraph(msgraph: MSGraph) -> Dict[int, SNode]:
         """
         Parse a MSGraph to SMSGraph
+
         Args:
             msgraph: The MSGraph required to be parsed
 

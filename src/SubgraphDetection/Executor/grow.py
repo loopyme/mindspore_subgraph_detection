@@ -3,8 +3,8 @@
 from collections import deque, Counter
 from typing import Tuple, Deque
 
-from SubgraphDetection.DataStucture import SNode
-from SubgraphDetection.DataStucture import SubgraphCore
+from SubgraphDetection.DataStructure import SNode
+from SubgraphDetection.DataStructure import SubgraphCore
 from SubgraphDetection.config import MIN_SUBGRAPH_INSTANCE_NUMBER
 
 

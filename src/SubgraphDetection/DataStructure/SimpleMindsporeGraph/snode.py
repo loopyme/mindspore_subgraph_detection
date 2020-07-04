@@ -6,6 +6,7 @@ from typing import Tuple
 
 @dataclass(init=True, order=False, eq=False, frozen=True)
 class SNode:
+    """A dataclass which stores all infos we need about nodes"""
     id: int
     type: str
     upstream: Tuple[int, ...]
