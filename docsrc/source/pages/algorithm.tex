@@ -1,0 +1,34 @@
+\documentclass[utf8]{ctexart}
+
+\usepackage[ruled]{algorithm2e}    
+
+\begin{document}
+\begin{algorithm}[H]
+    \caption{}
+    \KwIn{图G}
+    \KwOut{子图集的集合S}
+
+    统计图G中的频繁节点\;
+    将频繁节点标记为单节点的核，放入计算池中\;
+
+    \While{计算池不为空}{
+        从计算池中取出一个核$C_{i}$\;
+        \For{Ci的子图模式中的边界点$P_{ij}$}{
+            \For{Ci的所有子图实例中Pij位置上的对应节点$N_{ijk}$}{
+                记录节点$N_{ijk}$的所有下游节点的种类\;
+            }
+            统计节点$N_{ijk}$的下游节点的种类频次\;
+            \For{节点$N_{ijk}$的下游节点的种类$T_{ijkl}$}{
+                \If{种类频次大于阈值，且生长后的新核$C_{ijkl}$未被注册}
+                {
+                    注册该新核$C_{ijkl}$\;
+                    将新核放入计算池\;
+                }
+            }
+        }\If{无法生长出新核，且$C_{i}$是有效子图集}
+        {
+            将核$C_{i}$的拷贝放入子图集的集合S中\;
+        }
+        删除$C_{i}$\;}
+\end{algorithm}
+\end{document}
