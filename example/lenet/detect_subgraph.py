@@ -1,4 +1,5 @@
 from SubgraphDetection import detect_subgraph
+from example.eval_result import EvalResult
 from example.lenet.train.__main__ import train_lenet
 
 if __name__ == "__main__":
@@ -6,6 +7,7 @@ if __name__ == "__main__":
     train_lenet()
 
     # detect the subgraphs and save to file
-    detect_subgraph(
+    res = detect_subgraph(
         graph_path="./ms_output.pb",
         result_path="./subgraph.json")
+    print(EvalResult("./ms_output.pb", res))
