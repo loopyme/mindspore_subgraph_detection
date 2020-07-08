@@ -79,15 +79,15 @@ class SMSGraph:
         # Add PARAMETER&CONST nodes
         res.update(
             {
-                -1: SNode(-1, "PARAMETER", tuple(), tuple()),
-                -2: SNode(-2, "CONST", tuple(), tuple()),
+                -2: SNode(-1, "PARAMETER", tuple(), tuple()),
+                -3: SNode(-2, "CONST", tuple(), tuple()),
             }
         )
         return res
 
-    def node_count(self) -> Deque[Tuple[SNode, ...]]:
+    def frequent_nodes(self) -> Deque[Tuple[SNode, ...]]:
         """
-        Count the nodes and return a deque of node tuples, which may be used to build subgraph core later
+        Count the frequent nodes and return a deque of node tuples, which may be used to build subgraph core later
         Those node whose occurrences less than MIN_SUBGRAPH_INSTANCE_NUMBER will not returned
 
         Returns:
@@ -120,3 +120,7 @@ class SMSGraph:
 
     def __getitem__(self, node_id: int) -> SNode:
         return self._node_set[node_id]
+
+    def node_count(self):
+        """Count the number of nodes"""
+        return len(self._node_set)

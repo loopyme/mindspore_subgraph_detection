@@ -21,15 +21,29 @@ def core_grow(executor, core: SubgraphCore) -> deque:
     """
 
     def _check_stream_on_one_position(stream_nodes):
-        # count the common neighbor type
+        # get the neighbor type
         neighbor_type = tuple(
             "-".join(tuple(node.type for node in neighbor_nodes_per_node))
             for neighbor_nodes_per_node in stream_nodes
         )
+
+        # remove redundant node pattern: patch to handle cases where multiple nodes of the same type
+        # are connected to the same node
+        neighbor_node = tuple(
+            tuple(node for node in neighbor_nodes_per_node)
+            for neighbor_nodes_per_node in stream_nodes
+        )
+        duplicate_nodes_pattern = {n: 0 for n in neighbor_type}
+        node_count = Counter(neighbor_node).most_common()
+        for node, count in node_count:
+            if count > 1:
+                duplicate_nodes_pattern["-".join(tuple(n.type for n in node))] = count - 1
+
+        # count the common neighbor type
         common_type = tuple(
             t[0]
             for t in Counter(neighbor_type).most_common()
-            if t[1] >= MIN_SUBGRAPH_INSTANCE_NUMBER
+            if t[1] - duplicate_nodes_pattern[t[0]] >= MIN_SUBGRAPH_INSTANCE_NUMBER
         )
 
         # Tidy pattern-nodes data
@@ -49,6 +63,9 @@ def core_grow(executor, core: SubgraphCore) -> deque:
         )
 
     def _check_neighbors_on_one_position(nodes: Tuple[SNode, ...]):
+        # if nodes are not normal, return empty deque
+        if nodes[0].id < 0:
+            return deque()
         # find all possible upstream and downstream nodes
         upstream_nodes = tuple(
             tuple(executor.graph[node_id] for node_id in node.upstream)

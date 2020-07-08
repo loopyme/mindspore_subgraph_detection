@@ -46,7 +46,7 @@ class Executor:
 
         # cores that waiting for grow
         self._core_deque: Deque[SubgraphCore] = deque(
-            map(SubgraphCore, self.graph.node_count())
+            map(SubgraphCore, self.graph.frequent_nodes())
         )
 
         # all of the detected graphs
