@@ -14,9 +14,9 @@ class SMSGraph:
 
     non_normal_node_type = [
         NodeTypeEnum.NAME_SCOPE.value,
+        NodeTypeEnum.AGGREGATION_SCOPE.value,
         NodeTypeEnum.PARAMETER.value,
         NodeTypeEnum.CONST.value,
-        NodeTypeEnum.AGGREGATION_SCOPE.value,
     ]
 
     def __init__(self, graph: MSGraph):

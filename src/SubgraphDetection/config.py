@@ -11,3 +11,6 @@ MIN_SUBGRAPH_INSTANCE_NUMBER = 2
 
 # The minimum node number of a subgraph, subgraph instance with fewer nodes will not be detected
 MIN_SUBGRAPH_NODE_NUMBER = 4
+
+# Penalty terms are imposed on sub-sub-graph in thresholds to avoid multiple level subgraphs
+SUB_SUB_GRAPH_THRESHOLD_PENALTY = 2

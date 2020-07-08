@@ -12,7 +12,7 @@ from mindinsight.datavisual.data_transform.graph import MSGraph
 
 from SubgraphDetection.DataStructure import SMSGraph, SubgraphCore, Subgraph
 from SubgraphDetection.Executor.grow import core_grow
-from SubgraphDetection.config import MAX_WORKER
+from SubgraphDetection.config import MAX_WORKER, SUB_SUB_GRAPH_THRESHOLD_PENALTY
 
 
 class Executor:
@@ -80,6 +80,7 @@ class Executor:
             )
             ),
         )
+        self.check_subgraph()
 
     def register_core(self, core_ids: Tuple[int, ...]) -> Tuple[bool, ...]:
         """
@@ -116,3 +117,43 @@ class Executor:
         """
         core.commit()
         self._commit_subgraph.append(core)
+
+    def check_subgraph(self):
+        """
+        Check if there are any sub-subgraph in self._commit_subgraph and delete the match.
+        Run after an epoch is finished.
+
+        Notes:
+            Penalty terms are imposed on sub-sub-graph in thresholds to avoid multiple level subgraphs
+
+        Returns:
+            None
+        """
+        subgraph_size = tuple(len(g.pattern) for g in self._commit_subgraph)
+        subgraph_instance = tuple(len(g.nodes) for g in self._commit_subgraph)
+        subgraph_pattern = tuple(g.feature_nodes for g in self._commit_subgraph)
+        remove_graph = deque()
+        for i in range(len(self._commit_subgraph)):
+            for j in range(len(self._commit_subgraph)):
+                if i == j or i in remove_graph or j in remove_graph:
+                    continue
+                elif ((
+                              subgraph_size[i] > subgraph_size[j]
+                              and subgraph_instance[i]
+                              >= subgraph_instance[j]
+                              - SUB_SUB_GRAPH_THRESHOLD_PENALTY
+                              * (subgraph_size[i] - subgraph_size[j])
+                              and subgraph_pattern[i] >= subgraph_pattern[j]
+                      ) or (
+                              subgraph_size[i] < subgraph_size[j]
+                              and subgraph_instance[i]
+                              <= subgraph_instance[j]
+                              + SUB_SUB_GRAPH_THRESHOLD_PENALTY
+                              * (subgraph_size[j] - subgraph_size[i])
+                              and subgraph_pattern[j] <= subgraph_pattern[i]
+                      )):
+                    remove_graph.append(j)
+
+        self._commit_subgraph = deque(
+            g for i, g in enumerate(self._commit_subgraph) if i not in remove_graph
+        )

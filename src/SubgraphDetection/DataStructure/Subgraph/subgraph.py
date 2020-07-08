@@ -70,3 +70,11 @@ class Subgraph:
     @property
     def nodes(self):
         return self._nodes
+
+    @property
+    def pattern(self):
+        return self._pattern
+
+    @property
+    def feature_nodes(self):
+        return set(node.id for node in self._nodes[self._min_node_index])

@@ -126,5 +126,4 @@ class SubgraphCore(Subgraph):
         del self.__pointer
         del self.__boundary_pattern_index
         del self._min_node
-        del self._min_node_index
         return self
