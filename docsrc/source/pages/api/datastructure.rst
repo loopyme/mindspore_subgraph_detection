@@ -34,6 +34,9 @@ SMSGraph
 ********
 Subgraph
 ********
+.. Warning:: 
+
+   May contrary to intuition, but subgraph is not a subclass of SMSGraph, it's actually efficient store all infomations about a set of isomorphic subgraphs. See `算法简述-名词解释 <../algorithm.html#id2>`_ for more info.
 
 .. autoclass:: SubgraphDetection.DataStructure.Subgraph
    :members:
@@ -43,6 +46,10 @@ Subgraph
 ************
 SubgraphCore
 ************
+
+.. Note:: 
+
+   A Subgraph Core won't transform into a subgraph object untill finish growing.
 
 .. autoclass:: SubgraphDetection.DataStructure.SubgraphCore
    :members:

@@ -207,7 +207,7 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-# Test results
+# Test data and results
 *.dot
 *.dat
 *.svg
@@ -223,6 +223,10 @@ events.out.events.summary.*
 out.events.summary.*
 ./playground/summary/
 .clangd
+example/lstm_aclImdb/aclImdb/
+example/lstm_aclImdb/glove/
+example/lstm_aclImdb/preprocess/
+subgraph.json
 
 # Mindspore & Mindsight src
 ref/
@@ -238,3 +242,4 @@ src/mindspore
 
 # playground
 playground/
+
