@@ -99,8 +99,13 @@ class SubgraphCore(Subgraph):
         new_core._id = 0
 
         # update the min_node info
-        new_core._min_node = self._min_node
-        new_core._min_node_index = self._min_node_index
+        if self._min_node_index in keep_instance_index:
+            new_core._min_node = self._min_node
+            new_core._min_node_index = keep_instance_index.index(self._min_node_index)
+        else:
+            min_node_in_instance = tuple(min(instance) for instance in new_core._nodes)
+            new_core._min_node = min(min_node_in_instance)
+            new_core._min_node_index = min_node_in_instance.index(new_core._min_node)
 
         # update the minimum-id node info
         new_min_node_in_instance = tuple(min(n) for n in grow_nodes)
