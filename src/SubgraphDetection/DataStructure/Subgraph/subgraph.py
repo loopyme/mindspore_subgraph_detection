@@ -2,13 +2,19 @@
 from typing import Deque, List
 
 from SubgraphDetection.DataStructure import SNode
-from SubgraphDetection.config import SAFE_MODE
+from SubgraphDetection.config import config
 
 
 class Subgraph:
     """The subgraph: Not a subclass of SMSGraph, organized to improve performance"""
 
-    def __init__(self, pattern: Deque[str], nodes: List[Deque[SNode]], min_node: SNode, min_node_index: int):
+    def __init__(
+            self,
+            pattern: Deque[str],
+            nodes: List[Deque[SNode]],
+            min_node: SNode,
+            min_node_index: int,
+    ):
         """
         Init a Subgraph with pattern,nodes,and min id nodes info
 
@@ -30,7 +36,7 @@ class Subgraph:
                 - id                : hash('1-2')
         """
         # check if every subgraph instance is in the same pattern
-        if SAFE_MODE and not all(
+        if config.SAFE_MODE and not all(
                 [all([n[j].type == t for j, t in enumerate(pattern)]) for n in nodes]
         ):
             raise ValueError("Subgraph Nodes should be in the same pattern")

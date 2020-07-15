@@ -29,7 +29,9 @@ def dump_result(subgraph_deque: Deque[Subgraph], file_path: str):
                 return self.default(o.nodes)
             return str(o)
 
-    logger.info("Start to dump subgraph detecting result to file, file path: %s.", file_path)
+    logger.info(
+        "Start to dump subgraph detecting result to file, file path: %s.", file_path
+    )
     with open(file_path, "w") as f:
         f.write(json.dumps(subgraph_deque, indent=4, cls=JsonEncoder))
 

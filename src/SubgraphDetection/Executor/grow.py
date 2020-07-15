@@ -5,7 +5,7 @@ from typing import Tuple, Deque
 
 from SubgraphDetection.DataStructure import SNode
 from SubgraphDetection.DataStructure import SubgraphCore
-from SubgraphDetection.config import MIN_SUBGRAPH_INSTANCE_NUMBER
+from SubgraphDetection.config import config
 
 
 def core_grow(executor, core: SubgraphCore) -> deque:
@@ -37,13 +37,16 @@ def core_grow(executor, core: SubgraphCore) -> deque:
         node_count = Counter(neighbor_node).most_common()
         for node, count in node_count:
             if count > 1:
-                duplicate_nodes_pattern["-".join(tuple(n.type for n in node))] = count - 1
+                duplicate_nodes_pattern["-".join(tuple(n.type for n in node))] = (
+                        count - 1
+                )
 
         # count the common neighbor type
         common_type = tuple(
             t[0]
             for t in Counter(neighbor_type).most_common()
-            if t[1] - duplicate_nodes_pattern[t[0]] >= MIN_SUBGRAPH_INSTANCE_NUMBER
+            if t[1] - duplicate_nodes_pattern[t[0]]
+            >= config.MIN_SUBGRAPH_INSTANCE_NUMBER
         )
 
         # Tidy pattern-nodes data
@@ -86,10 +89,7 @@ def core_grow(executor, core: SubgraphCore) -> deque:
         new_cores += _check_neighbors_on_one_position(eq_node)
 
     # commit the graph core if no further graph possibilities
-    if (
-            len(new_cores) == 0
-            and core.is_valid_for_commit
-    ):
+    if len(new_cores) == 0 and core.is_valid_for_commit:
         executor.commit_core(core)
     else:
         # destroy the core
