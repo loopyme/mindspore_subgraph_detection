@@ -1,0 +1,1 @@
+detect-subgraph ./ms_output_0train.pb ./subgraph.json  --check_result --verbose
