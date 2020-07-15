@@ -23,8 +23,9 @@ master_doc = "index"
 project = "mindspore_subgraph_detection"
 copyright = "2020, Peter"
 author = "Peter"
-version = "0.0.2"
-release = "0.0.2"
+from SubgraphDetection import __version__
+
+version = __version__
 language = None
 exclude_patterns = []
 pygments_style = "sphinx"
