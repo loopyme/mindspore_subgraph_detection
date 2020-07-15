@@ -2,7 +2,7 @@
 from typing import Deque, List
 
 from SubgraphDetection.DataStructure import SNode
-from SubgraphDetection.config import config
+from SubgraphDetection.config import CONFIG
 
 
 class Subgraph:
@@ -36,7 +36,7 @@ class Subgraph:
                 - id                : hash('1-2')
         """
         # check if every subgraph instance is in the same pattern
-        if config.SAFE_MODE and not all(
+        if CONFIG.SAFE_MODE and not all(
                 [all([n[j].type == t for j, t in enumerate(pattern)]) for n in nodes]
         ):
             raise ValueError("Subgraph Nodes should be in the same pattern")

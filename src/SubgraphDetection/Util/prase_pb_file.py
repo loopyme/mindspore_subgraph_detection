@@ -1,3 +1,4 @@
+import logging
 from typing import Union
 
 from google.protobuf.text_format import ParseError
@@ -6,6 +7,8 @@ from mindinsight.datavisual.data_access.file_handler import FileHandler
 from mindinsight.datavisual.data_transform.graph import MSGraph
 from mindinsight.datavisual.proto_files import mindinsight_anf_ir_pb2 as anf_ir_pb2
 from mindinsight.utils.exceptions import UnknownError
+
+from SubgraphDetection.config import CONFIG
 
 
 def phase_pb_file(file_path: str) -> Union[MSGraph, None]:
@@ -18,7 +21,8 @@ def phase_pb_file(file_path: str) -> Union[MSGraph, None]:
     Returns:
         MSGraph, if load pb file and build graph success, will return the graph, else return None.
     """
-
+    if not CONFIG.VERBOSE:
+        logger.setLevel(logging.ERROR)
     logger.info("Start to load graph from pb file, file path: %s.", file_path)
     model_proto = anf_ir_pb2.ModelProto()
     try:

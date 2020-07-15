@@ -3,7 +3,7 @@ from collections import deque
 from typing import Tuple, Set, Deque, Union
 
 from SubgraphDetection.DataStructure import SNode, Subgraph
-from SubgraphDetection.config import config
+from SubgraphDetection.config import CONFIG
 
 
 class SubgraphCore(Subgraph):
@@ -120,8 +120,8 @@ class SubgraphCore(Subgraph):
     def is_valid_for_commit(self):
         """Check whether if self is valid subgraph"""
         return (
-                len(self._nodes) >= config.MIN_SUBGRAPH_INSTANCE_NUMBER
-                and len(self._nodes[0]) >= config.MIN_SUBGRAPH_NODE_NUMBER
+                len(self._nodes) >= CONFIG.MIN_SUBGRAPH_INSTANCE_NUMBER
+                and len(self._nodes[0]) >= CONFIG.MIN_SUBGRAPH_NODE_NUMBER
         )
 
     def commit(self):

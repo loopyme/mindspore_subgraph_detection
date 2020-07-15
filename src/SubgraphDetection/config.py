@@ -33,4 +33,4 @@ class Config:
 
 
 # Package-level config
-config = Config()
+CONFIG = Config()

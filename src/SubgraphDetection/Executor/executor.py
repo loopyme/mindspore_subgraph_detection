@@ -12,7 +12,7 @@ from mindinsight.datavisual.data_transform.graph import MSGraph
 
 from SubgraphDetection.DataStructure import SMSGraph, SubgraphCore, Subgraph
 from SubgraphDetection.Executor.grow import core_grow
-from SubgraphDetection.config import config
+from SubgraphDetection.config import CONFIG
 
 
 class Executor:
@@ -35,7 +35,7 @@ class Executor:
 
         # muti-thread executor
         self._executor: ThreadPoolExecutor = ThreadPoolExecutor(
-            max_workers=config.MAX_WORKER if config.MAX_WORKER > 0 else cpu_count()
+            max_workers=CONFIG.MAX_WORKER if CONFIG.MAX_WORKER > 0 else cpu_count()
         )
 
         # exclusive lock, useful when register the cores
@@ -64,7 +64,7 @@ class Executor:
         """
         i = 0
         while self._core_deque:
-            if config.VERBOSE:
+            if CONFIG.VERBOSE:
                 print(f"Epoch {i:>4}: There are {len(self._core_deque):>10} cores growing in the current epoch")
             self.next_epoch()
             i += 1
@@ -146,14 +146,14 @@ class Executor:
                         subgraph_size[i] > subgraph_size[j]
                         and subgraph_instance[i]
                         >= subgraph_instance[j]
-                        - config.SUB_SUB_GRAPH_THRESHOLD_PENALTY
+                        - CONFIG.SUB_SUB_GRAPH_THRESHOLD_PENALTY
                         * (subgraph_size[i] - subgraph_size[j])
                         and subgraph_pattern[i] >= subgraph_pattern[j]
                 ) or (
                         subgraph_size[i] < subgraph_size[j]
                         and subgraph_instance[i]
                         <= subgraph_instance[j]
-                        + config.SUB_SUB_GRAPH_THRESHOLD_PENALTY
+                        + CONFIG.SUB_SUB_GRAPH_THRESHOLD_PENALTY
                         * (subgraph_size[j] - subgraph_size[i])
                         and subgraph_pattern[j] <= subgraph_pattern[i]
                 ):

@@ -1,10 +1,12 @@
+import time
 from typing import Deque
 
 from SubgraphDetection import __version__
 from SubgraphDetection.DataStructure import Subgraph
 from SubgraphDetection.Executor.executor import Executor
 from SubgraphDetection.Util import dump_result, phase_pb_file
-from SubgraphDetection.config import config
+from SubgraphDetection.Util.check_result import ResultCheck
+from SubgraphDetection.config import CONFIG
 
 
 def detect_subgraph(graph_path, result_path, **kwargs) -> Deque[Subgraph]:
@@ -22,11 +24,18 @@ def detect_subgraph(graph_path, result_path, **kwargs) -> Deque[Subgraph]:
     Returns:
         Deque of subgraph, all the detected subgraphs
     """
-    config.set(kwargs)
+    time_st = time.time()
+    CONFIG.set(kwargs)
     graph = phase_pb_file(graph_path)
     executor = Executor(graph)
     result = executor.run()
     dump_result(result, result_path)
+
+    if CONFIG.CHECK_RESULT:
+        print(ResultCheck(graph, result))
+    if CONFIG.VERBOSE or CONFIG.CHECK_RESULT:
+        print(f"Detecting finished and result have been write to {result_path}, "
+              f"total usage of time:{time.time() - time_st} s")
     return result
 
 
@@ -87,7 +96,7 @@ def detect_subgraph_in_console():
             dest="MAX_WORKER",
             help="The worker number of Thread Pool, -1 = cqu_count",
             type=int,
-            default=config.MAX_WORKER,
+            default=CONFIG.MAX_WORKER,
         )
         parser.add_argument(
             "-i",
@@ -96,7 +105,7 @@ def detect_subgraph_in_console():
             help="The minimum instance number of a subgraph, "
                  "subgraph with fewer instances will not be detected",
             type=int,
-            default=config.MIN_SUBGRAPH_INSTANCE_NUMBER,
+            default=CONFIG.MIN_SUBGRAPH_INSTANCE_NUMBER,
         )
         parser.add_argument(
             "-n",
@@ -105,7 +114,7 @@ def detect_subgraph_in_console():
             help="The minimum node number of a subgraph, "
                  "subgraph instance with fewer nodes will not be detected",
             type=int,
-            default=config.MIN_SUBGRAPH_NODE_NUMBER,
+            default=CONFIG.MIN_SUBGRAPH_NODE_NUMBER,
         )
 
         parser.add_argument(
@@ -115,7 +124,7 @@ def detect_subgraph_in_console():
             help="Impose penalty terms on sub-sub-graph in thresholds "
                  "to avoid multiple level subgraphs",
             type=int,
-            default=config.SUB_SUB_GRAPH_THRESHOLD_PENALTY,
+            default=CONFIG.SUB_SUB_GRAPH_THRESHOLD_PENALTY,
         )
         parser.add_argument(
             "--check_result",

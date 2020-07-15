@@ -1,10 +1,12 @@
 import json
+import logging
 from collections import deque
 from typing import Deque
 
 from mindinsight.datavisual.common.log import logger
 
 from SubgraphDetection.DataStructure import Subgraph, SubgraphCore
+from SubgraphDetection.config import CONFIG
 
 
 def dump_result(subgraph_deque: Deque[Subgraph], file_path: str):
@@ -29,6 +31,8 @@ def dump_result(subgraph_deque: Deque[Subgraph], file_path: str):
                 return self.default(o.nodes)
             return str(o)
 
+    if not CONFIG.VERBOSE:
+        logger.setLevel(logging.ERROR)
     logger.info(
         "Start to dump subgraph detecting result to file, file path: %s.", file_path
     )

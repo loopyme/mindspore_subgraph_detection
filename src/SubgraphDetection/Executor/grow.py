@@ -5,7 +5,7 @@ from typing import Tuple, Deque
 
 from SubgraphDetection.DataStructure import SNode
 from SubgraphDetection.DataStructure import SubgraphCore
-from SubgraphDetection.config import config
+from SubgraphDetection.config import CONFIG
 
 
 def core_grow(executor, core: SubgraphCore) -> deque:
@@ -46,7 +46,7 @@ def core_grow(executor, core: SubgraphCore) -> deque:
             t[0]
             for t in Counter(neighbor_type).most_common()
             if t[1] - duplicate_nodes_pattern[t[0]]
-            >= config.MIN_SUBGRAPH_INSTANCE_NUMBER
+            >= CONFIG.MIN_SUBGRAPH_INSTANCE_NUMBER
         )
 
         # Tidy pattern-nodes data
