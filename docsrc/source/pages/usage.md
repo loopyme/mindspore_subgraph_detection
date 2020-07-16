@@ -3,8 +3,9 @@
 ## 安装
 首先需要手动安装一些依赖项，也即本项目的上游项目Mindspore和Mindinsight，建议到[Mindspore文档](https://www.mindspore.cn/install)中查询相关安装方式。
 
-本项目托管于Gitee，并在中科院软件所智能软件研究中心Gitlab上保持镜像，可以从下面的任何托管仓库下载本项目的Release包，若想获得最新版本，也可以clone repo。
+本项目托管于Gitee，并在Github和中科院软件所智能软件研究中心Gitlab上保持镜像，可以从下面的任何托管仓库下载本项目的Release包，若想获得最新版本，也可以clone repo。
  - https://gitee.com/loopyme/mindspore_subgraph_detection
+ - https://github.com/loopyme/mindspore_subgraph_detection
  - https://isrc.iscas.ac.cn/gitlab/summer2020/students/proj-2017182
 
 下载完毕后，在你习惯的Python环境下，只需运行```python setup.py install```就能安装SubgraphDetection
