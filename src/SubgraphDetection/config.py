@@ -28,8 +28,7 @@ class Config:
 
     def set(self, attrs: dict):
         for name, value in attrs.items():
-            print(name, value)
-            self.__setattr__(name, value)
+            self.__setattr__(name.upper(), value)
 
 
 # Package-level config
