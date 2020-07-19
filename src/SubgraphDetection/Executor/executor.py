@@ -8,6 +8,7 @@ from os import cpu_count
 from threading import Lock
 from typing import Tuple, Set, Union, Deque
 
+from mindinsight.datavisual.common.log import logger
 from mindinsight.datavisual.data_transform.graph import MSGraph
 
 from SubgraphDetection.DataStructure import SMSGraph, SubgraphCore, Subgraph
@@ -62,10 +63,10 @@ class Executor:
         Returns:
             Deque of subgraph, all the detected subgraphs
         """
-        i = 0
+        i = 1
         while self._core_deque:
             if CONFIG.VERBOSE:
-                print(f"Epoch {i:>4}: There are {len(self._core_deque):>10} cores growing in the current epoch")
+                logger.info(f"Epoch {i:>4}: There are {len(self._core_deque):>5} cores growing in the current epoch")
             self.next_epoch()
             i += 1
 
