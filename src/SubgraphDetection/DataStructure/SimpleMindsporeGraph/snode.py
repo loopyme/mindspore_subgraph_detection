@@ -12,6 +12,7 @@ class SNode:
     type: str
     upstream: Tuple[int, ...]
     downstream: Tuple[int, ...]
+    scope: str
 
     def __lt__(self, other):
         # negative node-id (non-normal-type nodes) should not lower than any normal nodes

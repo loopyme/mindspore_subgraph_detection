@@ -62,7 +62,7 @@ class SMSGraph:
             else:
                 return int(node.node_id)
 
-        # (id, type, upstream, downstream) is all that we need
+        # (id, type, upstream, downstream, scope) is all that we need
         # ! Scope and Aggregation Scope snodes will not be returned
         # TODO: Extract and make good use of Scope and Aggregation Scope info.
         res = {
@@ -71,16 +71,17 @@ class SMSGraph:
                 node.type,
                 tuple(map(get_node_id, node.input.keys())),
                 tuple(map(get_node_id, node.output.keys())),
+                name[: name.rfind("/")],
             )
-            for node in node_map.values()
+            for name, node in node_map.items()
             if node.type not in SMSGraph.non_normal_node_type
         }
 
         # Add PARAMETER&CONST nodes
         res.update(
             {
-                -2: SNode(-1, "PARAMETER", tuple(), tuple()),
-                -3: SNode(-2, "CONST", tuple(), tuple()),
+                -2: SNode(-1, "PARAMETER", tuple(), tuple(), ""),
+                -3: SNode(-2, "CONST", tuple(), tuple(), ""),
             }
         )
         return res

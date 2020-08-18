@@ -1,4 +1,4 @@
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 from SubgraphDetection.__main__ import detect_subgraph
 

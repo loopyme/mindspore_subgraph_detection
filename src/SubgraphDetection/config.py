@@ -26,6 +26,9 @@ class Config:
     # Whether to check the result after finish calculation
     CHECK_RESULT: bool = False
 
+    # Whether to set scope boundary
+    SCOPE_BOUNDARY: bool = True
+
     def set(self, attrs: dict):
         for name, value in attrs.items():
             self.__setattr__(name.upper(), value)

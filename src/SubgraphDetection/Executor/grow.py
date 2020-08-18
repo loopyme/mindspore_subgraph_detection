@@ -66,14 +66,28 @@ def core_grow(executor, core: SubgraphCore) -> deque:
         )
 
     def _check_neighbors_on_one_position(nodes: Tuple[SNode, ...]):
+        def _get_upstream_nodes(node):
+            if not CONFIG.SCOPE_BOUNDARY:
+                return tuple(executor.graph[node_id] for node_id in node.upstream)
+            else:
+                # use scope as a search boundary
+                res = tuple(
+                    filter(
+                        lambda upstream_node: upstream_node.scope == node.scope,
+                        tuple(executor.graph[node_id] for node_id in node.upstream),
+                    )
+                )
+                return res
+
         # if nodes are not normal, return empty deque
         if nodes[0].id < 0:
             return deque()
+
         # find all possible upstream and downstream nodes
-        upstream_nodes = tuple(
-            tuple(executor.graph[node_id] for node_id in node.upstream)
-            for node in nodes
-        )
+        upstream_nodes = tuple(_get_upstream_nodes(node) for node in nodes)
+        if None in upstream_nodes:
+            return tuple()
+
         # TODO: optimize the algorithm to allow downstream check
         # downstream_nodes = tuple(
         #     tuple(executor.graph[node_id] for node_id in node.downstream)

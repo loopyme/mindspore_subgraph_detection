@@ -17,11 +17,12 @@
 ### 终端运行
 
 安装结束后，在命令行输入```detect-subgraph -h```以查看所有的SubgraphDetection命令行参数和使用方法。
-```sh
+```sh          
 usage: detect-subgraph [-h] [-v] [--verbose] [--safe-mode] [-w MAX_WORKER]
                        [-i MIN_SUBGRAPH_INSTANCE_NUMBER]
                        [-n MIN_SUBGRAPH_NODE_NUMBER]
                        [-p SUB_SUB_GRAPH_THRESHOLD_PENALTY] [--check_result]
+                       [--disable_scope_boundary]
                        graph path result path
 
 Detect subgraphs in a Mindspore computational graph
@@ -49,6 +50,9 @@ optional arguments:
                         Impose penalty terms on sub-sub-graph in thresholds to
                         avoid multiple level subgraphs
   --check_result, -c    Check the result after finish calculation
+  --disable_scope_boundary, -d
+                        Disable the scope boundary, the subgraph instance will
+                        not be restricted to a scope
 ```
 若使用默认配置项，使用下面的命令就能触发子图挖掘运算（后面的两个参数分别为计算图文件路径和预设的结果输出路径）
 
@@ -93,3 +97,4 @@ detect_subgraph(
 |`MIN_SUBGRAPH_INSTANCE_NUMBER`|子图模式的频繁阈值，实例数小于该值的子图模式将不被接受|(int)>=0|2|
 |`MIN_SUBGRAPH_NODE_NUMBER`|子图模式的大小阈值，节点数小于该值的子图模式将不被接受|(int)>=0|4|
 |`SUB_SUB_GRAPH_THRESHOLD_PENALTY`|子图的子结构的罚项，考虑到某个子图的子结构可能是更频繁的子图，需要施加罚项以控制子图阶数|(int)>=0|2|
+|`SCOPE_BOUNDARY`|命名空间限制，使子图实例都在同一个命名空间中|(bool) True,False|True|

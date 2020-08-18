@@ -66,7 +66,9 @@ class Executor:
         i = 1
         while self._core_deque:
             if CONFIG.VERBOSE:
-                logger.info(f"Epoch {i:>4}: There are {len(self._core_deque):>5} cores growing in the current epoch")
+                logger.info(
+                    f"Epoch {i:>4}: There are {len(self._core_deque):>5} cores growing in the current epoch"
+                )
             self.next_epoch()
             i += 1
 

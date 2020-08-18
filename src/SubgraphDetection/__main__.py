@@ -33,9 +33,10 @@ def detect_subgraph(graph_path, result_path, **kwargs) -> Deque[Subgraph]:
 
     if CONFIG.CHECK_RESULT:
         print(ResultCheck(graph, result))
-    if CONFIG.VERBOSE or CONFIG.CHECK_RESULT:
-        print(f"Detecting finished and result have been write to {result_path}, "
-              f"total usage of time:{time.time() - time_st} s")
+    print(
+        f"Detecting finished and result have been write to {result_path}, "
+        f"total usage of time:{time.time() - time_st} s"
+    )
     return result
 
 
@@ -127,14 +128,23 @@ def detect_subgraph_in_console():
             default=CONFIG.SUB_SUB_GRAPH_THRESHOLD_PENALTY,
         )
         parser.add_argument(
-            "--check_result",
             "-c",
+            "--check_result",
             dest="CHECK_RESULT",
             help="Check the result after finish calculation",
+            action="store_true",
+        )
+        parser.add_argument(
+            "-d",
+            "--disable_scope_boundary",
+            dest="DIS_SCOPE_BOUNDARY",
+            help="Disable the scope boundary, "
+                 "the subgraph instance will not be restricted to a scope",
             action="store_true",
         )
 
         return parser.parse_args()
 
     args = vars(parse_args())
+    args["SCOPE_BOUNDARY"] = not args.pop("DIS_SCOPE_BOUNDARY")
     return detect_subgraph(args.pop("graph path"), args.pop("result path"), **args)
