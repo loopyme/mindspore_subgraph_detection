@@ -29,6 +29,10 @@ class Config:
     # Whether to set scope boundary
     SCOPE_BOUNDARY: bool = True
 
+    # Whether to check the isomorphism of name scope in detail,
+    # otherwise only the scope with the same name will be treated as isomorphism
+    DETAILED_ISOMORPHIC_CHECK: bool = False
+
     def set(self, attrs: dict):
         for name, value in attrs.items():
             self.__setattr__(name.upper(), value)

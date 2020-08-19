@@ -1,5 +1,4 @@
 """This file implement the core grow logic"""
-# TODO: rewrite in cython
 from collections import deque, Counter
 from typing import Tuple, Deque
 
