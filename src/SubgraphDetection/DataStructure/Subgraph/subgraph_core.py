@@ -121,7 +121,9 @@ class SubgraphCore(Subgraph):
         """Check whether if self is valid subgraph"""
         return (
                 len(self._nodes) >= CONFIG.MIN_SUBGRAPH_INSTANCE_NUMBER
-                and len(self._nodes[0]) >= CONFIG.MIN_SUBGRAPH_NODE_NUMBER
+                and CONFIG.MIN_SUBGRAPH_NODE_NUMBER
+                <= len(self._nodes[0])
+                <= CONFIG.MAX_SUBGRAPH_NODE_NUMBER
         )
 
     def commit(self):
@@ -135,3 +137,10 @@ class SubgraphCore(Subgraph):
         del self.__boundary_pattern_index
         del self._min_node
         return self
+
+    def __repr__(self):
+        return f"SubGraphCore-{self.pattern}*{len(self.nodes)}"
+
+    @property
+    def size(self):
+        return len(self.pattern)

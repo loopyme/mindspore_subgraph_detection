@@ -5,7 +5,7 @@ from typing import Deque
 
 from mindinsight.datavisual.common.log import logger
 
-from SubgraphDetection.DataStructure import Subgraph, SubgraphCore
+from SubgraphDetection.DataStructure import Subgraph, SubgraphCore, SNode, Scope
 from SubgraphDetection.config import CONFIG
 
 
@@ -29,6 +29,8 @@ def dump_result(subgraph_deque: Deque[Subgraph], file_path: str):
                 return o
             elif isinstance(o, (Subgraph, SubgraphCore)):
                 return self.default(o.nodes)
+            elif isinstance(o, (SNode, Scope)):
+                return self.default(o.name)
             return str(o)
 
     if not CONFIG.VERBOSE:

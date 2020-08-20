@@ -1,6 +1,7 @@
 """This file is used to define the simplified MindSpore graph."""
 from collections import deque
-from typing import Dict, List, Tuple, Deque
+from copy import deepcopy
+from typing import Dict, List, Tuple, Deque, Union
 
 from mindinsight.datavisual.data_transform.graph import MSGraph
 from mindinsight.datavisual.data_transform.graph.node import NodeTypeEnum
@@ -51,10 +52,6 @@ class SMSGraph:
         # Run scope isomorphism check
         self._check_scope()
 
-        # Generate highest-level node set
-        self._node_set = self.get_projection()
-        # TODO: use projection for subgraph detection
-
     @staticmethod
     def parse_MSGraph(
             msgraph: MSGraph,
@@ -87,10 +84,11 @@ class SMSGraph:
             get_node_id(name): SNode(
                 id=get_node_id(name),
                 type="parameter" if node.type == -2 else "const",
-                upstream=None,
+                upstream=(),
                 downstream=tuple(map(get_node_id, node.output.keys())),
                 scope=name[: name.rfind("/")],
                 level=1,
+                name=name,
             )
             for i, (name, node) in enumerate(node_map.items())
             if node.type in (NodeTypeEnum.PARAMETER.value, NodeTypeEnum.CONST.value)
@@ -105,6 +103,7 @@ class SMSGraph:
                 downstream=tuple(map(get_node_id, node.output.keys())),
                 scope=name[: name.rfind("/")],
                 level=1,
+                name=name,
             )
             for name, node in node_map.items()
             if node.type not in SMSGraph.non_normal_node_type
@@ -119,16 +118,21 @@ class SMSGraph:
                 member=None,
                 level=-1,
                 type="",
+                name=name,
             )
             for i, (name, node) in enumerate(node_map.items())
             if node.type == NodeTypeEnum.NAME_SCOPE.value
         }
         return normal_node, scope_node, parameter_node
 
-    def frequent_nodes(self) -> Deque[Tuple[SNode, ...]]:
+    @staticmethod
+    def frequent_nodes(nodes: Dict[int, SNode]) -> Deque[Tuple[SNode, ...]]:
         """
         Count the frequent nodes and return a deque of node tuples, which may be used to build subgraph core later
         Those node whose occurrences less than MIN_SUBGRAPH_INSTANCE_NUMBER will not returned
+
+        Args:
+            nodes: Nodes that we are counting
 
         Returns:
             Each tuple contains same-type nodes
@@ -137,7 +141,7 @@ class SMSGraph:
 
         # sort node by type
         sorted_node_map: List[Tuple[str, SNode]] = sorted(
-            self._normal_node.items(), key=lambda x: x[1].type, reverse=True
+            nodes.items(), key=lambda x: x[1].type, reverse=True
         )
 
         # count it
@@ -161,7 +165,7 @@ class SMSGraph:
     def __getitem__(self, node_id: int) -> SNode:
         return self._normal_node[node_id]
 
-    def node_count(self):
+    def get_node_count(self):
         """Count the number of nodes"""
         return len(self._normal_node) + len(self._parameter_node)
 
@@ -247,15 +251,61 @@ class SMSGraph:
             # isomorphism check step.2: check in detailed
             pass
 
-    def get_projection(self, level: int):
+    def get_level_node(self, level: int) -> Dict[int, Union[SNode, Scope]]:
         """
-        Get a projection of a centain level of whole graph
+        Get a projection of a certain level of whole graph
 
         Args:
-            level:
+            level: which level are we dealing with
 
         Returns:
-
+            Node dict of the certain level
         """
-        # TODO:implement
-        pass
+        if level == 1:
+            # TODO: maybe we should remove some node to avoid sub-sub-graph
+            node_set = self._normal_node.copy()
+            node_set.update(self._parameter_node)
+        else:
+            node_set = {
+                scope.id: deepcopy(scope)
+                for name, scope in self._scope_node.items()
+                if scope.level == level
+            }
+
+            if not node_set:
+                return {}
+
+            # redirect the scope upstream and downstream
+            def get_node_scope(node: SNode, target_level) -> Scope:
+                n_level, n_scope = node.level, node
+                while n_level < target_level:
+                    if node.scope in self._scope_node.keys():
+                        n_scope = self._scope_node[n_scope.scope]
+                        n_level = n_scope.level
+                    else:
+                        n_scope = None
+                        break
+                if n_level > target_level:
+                    n_scope = None
+                return n_scope.id if n_scope is not None else None
+
+            for _, n in node_set.items():
+                n.upstream = tuple(
+                    get_node_scope(self._normal_node[node_id], level)
+                    for node_id in n.upstream
+                )
+                n.downstream = tuple(
+                    get_node_scope(self._normal_node[node_id], level)
+                    for node_id in n.downstream
+                )
+                n.upstream = tuple(set(filter(lambda x: x is not None, n.upstream)))
+                n.downstream = tuple(set(filter(lambda x: x is not None, n.downstream)))
+        return node_set
+
+    def get_max_level(self) -> int:
+        """
+        Get the max level of the graph scope nodes
+        Returns:
+            max level
+        """
+        return max(scope.level for scope in self._scope_node.values())

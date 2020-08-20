@@ -5,7 +5,7 @@ from typing import Tuple
 from SubgraphDetection.DataStructure.SimpleMindsporeGraph.snode import SNode
 
 
-@dataclass
+@dataclass(init=True, order=True, frozen=False, unsafe_hash=True)
 class Scope(SNode):
     """A dataclass which stores all infos we need about scopes"""
 

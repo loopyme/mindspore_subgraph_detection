@@ -20,6 +20,9 @@ class Config:
     # The minimum node number of a subgraph, subgraph instance with fewer nodes will not be detected
     MIN_SUBGRAPH_NODE_NUMBER: int = 4
 
+    # The maximum node number of a subgraph, subgraph instance with more nodes will not be detected
+    MAX_SUBGRAPH_NODE_NUMBER: int = 36
+
     # Penalty terms are imposed on sub-sub-graph in zthresholds to avoid multiple level subgraphs
     SUB_SUB_GRAPH_THRESHOLD_PENALTY: int = 2
 
@@ -32,6 +35,9 @@ class Config:
     # Whether to check the isomorphism of name scope in detail,
     # otherwise only the scope with the same name will be treated as isomorphism
     DETAILED_ISOMORPHIC_CHECK: bool = False
+
+    # The number of the skipped top levels
+    SKIPPED_LEVEL = 3
 
     def set(self, attrs: dict):
         for name, value in attrs.items():

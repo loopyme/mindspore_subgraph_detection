@@ -109,7 +109,6 @@ def detect_subgraph_in_console():
             default=CONFIG.MIN_SUBGRAPH_INSTANCE_NUMBER,
         )
         parser.add_argument(
-            "-n",
             "--min-nodes",
             dest="MIN_SUBGRAPH_NODE_NUMBER",
             help="The minimum node number of a subgraph, "
@@ -117,7 +116,14 @@ def detect_subgraph_in_console():
             type=int,
             default=CONFIG.MIN_SUBGRAPH_NODE_NUMBER,
         )
-
+        parser.add_argument(
+            "--max-nodes",
+            dest="MAX_SUBGRAPH_NODE_NUMBER",
+            help="The maximum node number of a subgraph, "
+                 "subgraph instance with more nodes will not be detected",
+            type=int,
+            default=CONFIG.MAX_SUBGRAPH_NODE_NUMBER,
+        )
         parser.add_argument(
             "-p",
             "--penalty",
@@ -128,6 +134,13 @@ def detect_subgraph_in_console():
             default=CONFIG.SUB_SUB_GRAPH_THRESHOLD_PENALTY,
         )
         parser.add_argument(
+            "--skipped-level",
+            dest="SKIPPED_LEVEL",
+            help="The number of the skipped top levels",
+            type=int,
+            default=CONFIG.SKIPPED_LEVEL,
+        )
+        parser.add_argument(
             "-c",
             "--check_result",
             dest="CHECK_RESULT",
@@ -135,11 +148,17 @@ def detect_subgraph_in_console():
             action="store_true",
         )
         parser.add_argument(
-            "-d",
             "--disable_scope_boundary",
             dest="DIS_SCOPE_BOUNDARY",
-            help="Disable the scope boundary, "
+            help="disable the scope boundary, "
                  "the subgraph instance will not be restricted to a scope",
+            action="store_true",
+        )
+        parser.add_argument(
+            "-d",
+            "--detailed_isomorphic_check",
+            dest="DETAILED_ISOMORPHIC_CHECK",
+            help="check the isomorphism of name scope in detail",
             action="store_true",
         )
 

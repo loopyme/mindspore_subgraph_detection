@@ -22,7 +22,7 @@ def core_grow(executor, core: SubgraphCore) -> deque:
     def _check_stream_on_one_position(stream_nodes):
         # get the neighbor type
         neighbor_type = tuple(
-            "-".join(tuple(node.type for node in neighbor_nodes_per_node))
+            "/".join(tuple(node.type for node in neighbor_nodes_per_node))
             for neighbor_nodes_per_node in stream_nodes
         )
 
@@ -36,7 +36,7 @@ def core_grow(executor, core: SubgraphCore) -> deque:
         node_count = Counter(neighbor_node).most_common()
         for node, count in node_count:
             if count > 1:
-                duplicate_nodes_pattern["-".join(tuple(n.type for n in node))] = (
+                duplicate_nodes_pattern["/".join(tuple(n.type for n in node))] = (
                         count - 1
                 )
 
@@ -58,7 +58,7 @@ def core_grow(executor, core: SubgraphCore) -> deque:
 
         return deque(
             core.grow(
-                deque(pattern.split("-")), nodes, tuple(pattern_keep_core_dic[pattern])
+                deque(pattern.split("/")), nodes, tuple(pattern_keep_core_dic[pattern])
             )
             for pattern, nodes in pattern_nodes_dic.items()
             if pattern != ""
@@ -66,14 +66,17 @@ def core_grow(executor, core: SubgraphCore) -> deque:
 
     def _check_neighbors_on_one_position(nodes: Tuple[SNode, ...]):
         def _get_upstream_nodes(node):
+
             if not CONFIG.SCOPE_BOUNDARY:
-                return tuple(executor.graph[node_id] for node_id in node.upstream)
+                return tuple(executor.graph_nodes[node_id] for node_id in node.upstream)
             else:
                 # use scope as a search boundary
                 res = tuple(
                     filter(
                         lambda upstream_node: upstream_node.scope == node.scope,
-                        tuple(executor.graph[node_id] for node_id in node.upstream),
+                        tuple(
+                            executor.graph_nodes[node_id] for node_id in node.upstream
+                        ),
                     )
                 )
                 return res
@@ -107,6 +110,11 @@ def core_grow(executor, core: SubgraphCore) -> deque:
     else:
         # destroy the core
         del core
+
+    # remove it if the new_core is too large
+    new_cores = tuple(
+        filter(lambda x: x.size < CONFIG.MAX_SUBGRAPH_NODE_NUMBER, new_cores)
+    )
 
     # register core to avoid extra computation
     new_core_id = tuple(map(lambda x: x.id, new_cores))

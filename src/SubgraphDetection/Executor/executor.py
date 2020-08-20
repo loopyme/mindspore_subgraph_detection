@@ -6,12 +6,12 @@ from functools import reduce
 from operator import __add__
 from os import cpu_count
 from threading import Lock
-from typing import Tuple, Set, Union, Deque
+from typing import Tuple, Set, Union, Deque, Dict
 
 from mindinsight.datavisual.common.log import logger
 from mindinsight.datavisual.data_transform.graph import MSGraph
 
-from SubgraphDetection.DataStructure import SMSGraph, SubgraphCore, Subgraph
+from SubgraphDetection.DataStructure import SMSGraph, SubgraphCore, Subgraph, SNode
 from SubgraphDetection.Executor.grow import core_grow
 from SubgraphDetection.config import CONFIG
 
@@ -46,12 +46,18 @@ class Executor:
         self._registered_core: Set[int] = set()
 
         # cores that waiting for grow
-        self._core_deque: Deque[SubgraphCore] = deque(
-            map(SubgraphCore, self.graph.frequent_nodes())
-        )
+        self._core_deque: Deque[SubgraphCore] = deque()
 
         # all of the detected graphs
         self._commit_subgraph: Deque[Subgraph] = deque()
+
+        # level of the graph which we working at
+        self._current_level: int = max(
+            self.graph.get_max_level() - CONFIG.SKIPPED_LEVEL, 1
+        )
+
+        # nodes of the graph which we working at
+        self.graph_nodes: Dict[int, SNode] = {}
 
     def get_subgraph(self) -> Deque[Subgraph]:
         return self._commit_subgraph
@@ -63,16 +69,24 @@ class Executor:
         Returns:
             Deque of subgraph, all the detected subgraphs
         """
+        while self._current_level > 0:
+            self.next_level()
+        return self.get_subgraph()
+
+    def next_level(self):
+        self.graph_nodes = self.graph.get_level_node(self._current_level)
+        self._core_deque = deque(
+            map(SubgraphCore, self.graph.frequent_nodes(self.graph_nodes))
+        )
         i = 1
         while self._core_deque:
             if CONFIG.VERBOSE:
                 logger.info(
-                    f"Epoch {i:>4}: There are {len(self._core_deque):>5} cores growing in the current epoch"
+                    f"Level {self._current_level:>3} Epoch {i:>4}: There are {len(self._core_deque):>5} cores growing in the current epoch"
                 )
             self.next_epoch()
             i += 1
-
-        return self.get_subgraph()
+        self._current_level -= 1
 
     def next_epoch(self):
         """Let all cores in core_deque grow to next epoch and update the core_deque"""

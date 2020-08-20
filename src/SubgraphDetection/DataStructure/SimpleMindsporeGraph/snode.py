@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import Tuple
 
 
-@dataclass(init=True, order=False, eq=False, frozen=False)
+@dataclass(init=True, order=True, frozen=False, unsafe_hash=True)
 class SNode:
     """A dataclass which stores all infos we need about nodes"""
 
@@ -28,12 +28,8 @@ class SNode:
     # For example, the level of the leaf node is 1.
     level: int
 
-    def __lt__(self, other):
-        # negative node-id (non-normal-type nodes) should not lower than any normal nodes
-        return 0 < self.id < other.id
+    # Origin name of node, useful when dump the result
+    name: str
 
     def __repr__(self):
-        if self.id > 0:
-            return f"Node-{self.id} {self.type}"
-        else:
-            return f"Node {self.type}"
+        return f"Node-{self.id} {self.type}"
