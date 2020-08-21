@@ -238,9 +238,11 @@ src/mindspore
 .vscode/
 
 # generated doc
-doc/
-*ubyte
+docs/
 
 # playground
 playground/
+
+# test result
+*.json
 
