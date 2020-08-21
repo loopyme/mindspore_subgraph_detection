@@ -4,11 +4,32 @@
 
 \begin{document}
 \begin{algorithm}[H]
-    \caption{}
+    \caption{形成第i层的节点集}
     \KwIn{图G}
-    \KwOut{子图集的集合S}
+    \KwOut{某层的节点集}
 
-    统计图G中的频繁节点\;
+    为图中所有种类(包括Scope)的节点分配独立ID\;
+    按种类进行分类，获得Scope节点集$S_{scope}$，算子节点集$S_{normal}$，参数和常数节点集$S_{parameter}$\;
+    确定所有节点的层级\;
+
+    \uIf {i==1} {
+        输出$S_{normal}$+$S_{parameter}$\;
+    } \Else {
+        筛选$S_{scope}$，获得层级i的节点集$S_{scope-i}$\;
+        \For{$S_{scope-i}$中的节点$n$}{
+            重定向$n$的上下游节点id至层级i\;
+        }
+        输出$S_{scope-i}$\;
+    }
+
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \caption{子图挖掘}
+    \KwIn{节点集$S_{node}$}
+    \KwOut{子图集的集合$S_{subgraph}$}
+
+    统计节点集$S_{node}$中的频繁节点\;
     将频繁节点标记为单节点的核，放入计算池中\;
 
     \While{计算池不为空}{
@@ -19,7 +40,7 @@
             }
             统计节点$N_{ijk}$的下游节点的种类频次\;
             \For{节点$N_{ijk}$的下游节点的种类$T_{ijkl}$}{
-                \If{种类频次大于阈值，且生长后的新核$C_{ijkl}$未被注册}
+                \If{生长后的新核$C_{ijkl}$满足各种阈值条件，且未被注册}
                 {
                     注册该新核$C_{ijkl}$\;
                     将新核放入计算池\;
@@ -27,8 +48,19 @@
             }
         }\If{无法生长出新核，且$C_{i}$是有效子图集}
         {
-            将核$C_{i}$的拷贝放入子图集的集合S中\;
+            将核$C_{i}$的拷贝放入子图集的集合$S_{subgraph}$中\;
         }
-        删除$C_{i}$\;}
+        删除$C_{i}$\;
+        \For{$S_{subgraph}$中的子图$SG_i$}{
+            \For{$S_{subgraph}$中除$SG_i$的其他子图$SG_j$}{
+                \If{$SG_i$是$SG_j$的子图，且$SG_i$的各项参数不符合带罚项的阈值条件}
+                {
+                    移除$SG_i$\;
+                }
+            }
+        }
+    }
+    输出$SG_i$\;
+
 \end{algorithm}
 \end{document}

@@ -38,3 +38,17 @@
  - 2020-08-18 **Tag v0.1.1**
    - 特性 
      - 添加了命名空间边界
+ - 2020-08-21 **Tag v0.1.2**
+   - 特性 
+     - 添加子图实例最大节点数限制
+     - 添加Scope型节点
+     - 每个Parameter和constant节点拥有其独自的id
+     - 使用全局的id代替原来的局部id
+     - 添加了分层次的子图挖掘
+     - 在结果中使用节点名称代替节点id
+     - 添加了更多的配置项
+       - SCOPE_BOUNDARY
+       - DETAILED_ISOMORPHIC_CHECK
+       - SKIPPED_LEVEL
+   - 文档
+     - 更新和调整了文档

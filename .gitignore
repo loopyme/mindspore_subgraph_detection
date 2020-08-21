@@ -237,7 +237,8 @@ src/mindspore
 .idea/
 .vscode/
 
-# playground data
+# generated doc
+doc/
 *ubyte
 
 # playground

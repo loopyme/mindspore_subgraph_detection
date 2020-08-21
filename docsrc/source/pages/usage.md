@@ -4,9 +4,9 @@
 首先需要手动安装一些依赖项，也即本项目的上游项目Mindspore和Mindinsight，建议到[Mindspore文档](https://www.mindspore.cn/install)中查询相关安装方式。
 
 本项目托管于Gitee，并在Github和中科院软件所智能软件研究中心Gitlab上保持镜像，可以从下面的任何托管仓库下载本项目的Release包，若想获得最新版本，也可以clone repo。
- - https://gitee.com/loopyme/mindspore_subgraph_detection
- - https://github.com/loopyme/mindspore_subgraph_detection
- - https://isrc.iscas.ac.cn/gitlab/summer2020/students/proj-2017182
+ - [repo at Gitee](https://gitee.com/loopyme/mindspore_subgraph_detection)
+ - [repo at Github](https://github.com/loopyme/mindspore_subgraph_detection)
+ - [repo at ISCAS-Gitlab](https://isrc.iscas.ac.cn/gitlab/summer2020/students/proj-2017182)
 
 下载完毕后，在你习惯的Python环境下，只需运行```python setup.py install```就能安装SubgraphDetection
 
@@ -20,9 +20,11 @@
 ```sh          
 usage: detect-subgraph [-h] [-v] [--verbose] [--safe-mode] [-w MAX_WORKER]
                        [-i MIN_SUBGRAPH_INSTANCE_NUMBER]
-                       [-n MIN_SUBGRAPH_NODE_NUMBER]
-                       [-p SUB_SUB_GRAPH_THRESHOLD_PENALTY] [--check_result]
-                       [--disable_scope_boundary]
+                       [--min-nodes MIN_SUBGRAPH_NODE_NUMBER]
+                       [--max-nodes MAX_SUBGRAPH_NODE_NUMBER]
+                       [-p SUB_SUB_GRAPH_THRESHOLD_PENALTY]
+                       [--skipped-level SKIPPED_LEVEL] [-c]
+                       [--disable_scope_boundary] [-d]
                        graph path result path
 
 Detect subgraphs in a Mindspore computational graph
@@ -43,16 +45,24 @@ optional arguments:
   -i MIN_SUBGRAPH_INSTANCE_NUMBER, --min-instance MIN_SUBGRAPH_INSTANCE_NUMBER
                         The minimum instance number of a subgraph, subgraph
                         with fewer instances will not be detected
-  -n MIN_SUBGRAPH_NODE_NUMBER, --min-nodes MIN_SUBGRAPH_NODE_NUMBER
+  --min-nodes MIN_SUBGRAPH_NODE_NUMBER
                         The minimum node number of a subgraph, subgraph
                         instance with fewer nodes will not be detected
+  --max-nodes MAX_SUBGRAPH_NODE_NUMBER
+                        The maximum node number of a subgraph, subgraph
+                        instance with more nodes will not be detected
   -p SUB_SUB_GRAPH_THRESHOLD_PENALTY, --penalty SUB_SUB_GRAPH_THRESHOLD_PENALTY
                         Impose penalty terms on sub-sub-graph in thresholds to
                         avoid multiple level subgraphs
-  --check_result, -c    Check the result after finish calculation
-  --disable_scope_boundary, -d
-                        Disable the scope boundary, the subgraph instance will
+  --skipped-level SKIPPED_LEVEL
+                        The number of the skipped top levels
+  -c, --check_result    Check the result after finish calculation
+  --disable_scope_boundary
+                        disable the scope boundary, the subgraph instance will
                         not be restricted to a scope
+  -d, --detailed_isomorphic_check
+                        check the isomorphism of name scope in detail
+
 ```
 若使用默认配置项，使用下面的命令就能触发子图挖掘运算（后面的两个参数分别为计算图文件路径和预设的结果输出路径）
 
@@ -86,7 +96,7 @@ detect_subgraph(
 
 ## 运行参数
 
-目前已提供了简洁的参数调整接口，以下运行参数都可自行调整，其中项目的高效执行严重依赖于`MIN_SUBGRAPH_INSTANCE_NUMBER`和`MIN_SUBGRAPH_NODE_NUMBER`的正确选取。
+目前已提供了简洁的参数调整接口，以下运行参数都可自行调整。
 
 |配置项|解释|可选值|默认值|
 |:--:|:--:|:--:|:--:|
@@ -96,5 +106,8 @@ detect_subgraph(
 |`MAX_WORKER`|并发线程数,-1表示使用CPU数目|(int)>0 or -1|-1|
 |`MIN_SUBGRAPH_INSTANCE_NUMBER`|子图模式的频繁阈值，实例数小于该值的子图模式将不被接受|(int)>=0|2|
 |`MIN_SUBGRAPH_NODE_NUMBER`|子图模式的大小阈值，节点数小于该值的子图模式将不被接受|(int)>=0|4|
+|`MAX_SUBGRAPH_NODE_NUMBER`|子图模式的大小阈值，节点数大于该值的子图模式将不被接受|(int)>=0|36|
 |`SUB_SUB_GRAPH_THRESHOLD_PENALTY`|子图的子结构的罚项，考虑到某个子图的子结构可能是更频繁的子图，需要施加罚项以控制子图阶数|(int)>=0|2|
 |`SCOPE_BOUNDARY`|命名空间限制，使子图实例都在同一个命名空间中|(bool) True,False|True|
+|`DETAILED_ISOMORPHIC_CHECK`|仔细的检查scope是否同构，否则只认为名称相同的scope同构|(bool) True,False|False|
+|`SKIPPED_LEVEL`|不进行子图挖掘的顶部节点层次|(int)>=1|3|
