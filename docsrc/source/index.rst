@@ -41,3 +41,12 @@ MindSpore是华为自研的深度学习框架，其中的计算图模式是一�
 
    pages/reference
    pages/dependencies
+
+.. toctree::
+   :maxdepth: 1
+   :caption: 项目简述
+   :hidden:
+
+   HTML格式 <https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.html>
+   PDF格式 <https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.pdf>
+   PPT格式 <https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.pptx>

@@ -246,3 +246,5 @@ playground/
 # test result
 *.json
 
+/test/test_result.csv
+/upload_doc.sh
