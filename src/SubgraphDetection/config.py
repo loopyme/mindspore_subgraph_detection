@@ -23,7 +23,7 @@ class Config:
     # The maximum node number of a subgraph, subgraph instance with more nodes will not be detected
     MAX_SUBGRAPH_NODE_NUMBER: int = 36
 
-    # Penalty terms are imposed on sub-sub-graph in zthresholds to avoid multiple level subgraphs
+    # Penalty terms are imposed on sub-sub-graph in thresholds to avoid multiple level subgraphs
     SUB_SUB_GRAPH_THRESHOLD_PENALTY: int = 2
 
     # Whether to check the result after finish calculation

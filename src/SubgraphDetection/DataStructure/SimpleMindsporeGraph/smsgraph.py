@@ -221,16 +221,17 @@ class SMSGraph:
             for name, scope in self._scope_node.items():
                 scope.type = name[name.rfind("/") + 1:]
         else:
-            # TODO:implementation of isomorphism check
-
-            # isomorphism check step.1: check level, size and connected node count
+            # isomorphism check: check level, size and connected node count
+            # TODO: detailed isomorphism check (very expensive, may be unnecessary)
             scope_basic_info_buffer = {
-                scope_name: "{level}-{size}-{upstream}-{downstream}".format(
+                scope_name: hash("{level}-{size}-{upstream}-{downstream}-{upstream_type}-{downstream_hash}".format(
                     level=scope_name.count("/"),
                     size=len(scope.member),
                     upstream=len(scope.upstream),
                     downstream=len(scope.downstream),
-                )
+                    upstream_type=hash("".join(self._normal_node[n].type for n in scope.upstream)),
+                    downstream_hash=hash("".join(self._normal_node[n].type for n in scope.downstream)),
+                ))
                 for scope_name, scope in self._scope_node.items()
             }
             isomorphic_scope_candidate = []
@@ -238,18 +239,20 @@ class SMSGraph:
             for scope_id, info in scope_basic_info_buffer.items():
                 if info not in scope_basic_info_buffer_reverse.keys():
                     scope_basic_info_buffer_reverse[info] = [
-                        scope_id[scope_id.rfind("/") + 1:]
+                        scope_id
                     ]
                 else:
                     scope_basic_info_buffer_reverse[info].append(
-                        scope_id[scope_id.rfind("/") + 1:]
+                        scope_id
                     )
             for info, scope_ids in scope_basic_info_buffer_reverse.items():
                 if len(scope_ids) > 1:
                     isomorphic_scope_candidate.append(scope_ids)
 
-            # isomorphism check step.2: check in detailed
-            pass
+            for candidate in isomorphic_scope_candidate:
+                scope_type = hash(candidate[0])
+                for s in candidate:
+                    self._scope_node[s].type = str(scope_type)
 
     def get_level_node(self, level: int) -> Dict[int, Union[SNode, Scope]]:
         """

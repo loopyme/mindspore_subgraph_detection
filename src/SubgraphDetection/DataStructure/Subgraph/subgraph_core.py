@@ -77,7 +77,6 @@ class SubgraphCore(Subgraph):
         Returns:
             The new core grow from self
         """
-        # TODO:check if node_pattern, grow_nodes, keep_instance_index is valid
 
         # do some copy
         new_core = SubgraphCore(nodes=None)
