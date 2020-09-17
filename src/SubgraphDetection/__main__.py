@@ -1,5 +1,5 @@
 import time
-from typing import Deque
+from typing import Deque, Union
 
 from SubgraphDetection import __version__
 from SubgraphDetection.DataStructure import Subgraph
@@ -9,7 +9,7 @@ from SubgraphDetection.Util.check_result import ResultCheck
 from SubgraphDetection.config import CONFIG
 
 
-def detect_subgraph(graph_path, result_path, **kwargs) -> Deque[Subgraph]:
+def detect_subgraph(graph_path, result_path, **kwargs) -> Union[Deque[Subgraph], ResultCheck]:
     """
     Detect the subgraph in a mindspore computational graph
 
@@ -22,7 +22,8 @@ def detect_subgraph(graph_path, result_path, **kwargs) -> Deque[Subgraph]:
         **kwargs: Any other args will pass to config
 
     Returns:
-        Deque of subgraph, all the detected subgraphs
+        Deque of subgraph, all the detected subgraphs.
+        If CHECK_RESULT, it will return a ResultCheck object.
     """
     time_st = time.time()
     CONFIG.set(kwargs)
@@ -31,13 +32,16 @@ def detect_subgraph(graph_path, result_path, **kwargs) -> Deque[Subgraph]:
     result = executor.run()
     dump_result(result, result_path)
 
-    if CONFIG.CHECK_RESULT:
-        print(ResultCheck(graph, result))
     print(
         f"Detecting finished and result have been write to {result_path}, "
         f"total usage of time:{time.time() - time_st} s"
     )
-    return result
+
+    if CONFIG.CHECK_RESULT:
+        result_check = ResultCheck(graph, result)
+        return result_check
+    else:
+        return result
 
 
 def detect_subgraph_in_console():

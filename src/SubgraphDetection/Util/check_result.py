@@ -2,7 +2,6 @@ from typing import Deque
 
 from mindinsight.datavisual.data_transform.graph import MSGraph
 
-from SubgraphDetection.DataStructure import SMSGraph
 from SubgraphDetection.DataStructure import Subgraph
 
 
@@ -15,13 +14,7 @@ class ResultCheck:
             subgraph_deque: The result
         """
 
-        self.graph_size = len(
-            tuple(
-                node
-                for node in graph._normal_node_map.values()
-                if node.type not in set(SMSGraph.non_normal_node_type[:1])
-            )
-        )
+        self.graph_size = len(graph._normal_node_map)
         self.num_subgraph = len(subgraph_deque)
         self.subgraph_size = tuple(len(g.nodes[0]) for g in subgraph_deque)
         self.subgraph_count = tuple(len(g.nodes) for g in subgraph_deque)
