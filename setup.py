@@ -12,7 +12,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='SubgraphDetection',
-    version='0.1.2',
+    version='0.2.0',
     description=(
         'Detect the subgraph in a mindspore computational graph'
     ),

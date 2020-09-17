@@ -11,7 +11,25 @@
      - 使得SubgraphDetection可以被安装
    - 文档
      - 添加了文档
-
+ - 2020-09-17 **Release v0.2.0** 调优了一些功能
+   - 特性 
+     - 添加了终端运行支持
+     - 添加了配置调整接口
+     - 使得SubgraphDetection可以被安装
+     - 添加子图实例最大节点数限制
+     - 添加Scope型节点
+     - 每个Parameter和constant节点拥有其独自的id
+     - 使用全局的id代替原来的局部id
+     - 添加了分层次的子图挖掘
+     - 在结果中使用节点名称代替节点id
+     - 添加了更多的配置项
+       - SCOPE_BOUNDARY
+       - DETAILED_ISOMORPHIC_CHECK
+       - SKIPPED_LEVEL
+   - 文档
+     - 更新和调整了文档
+   - 测试
+     - 添加非自动的网格测试
 ## 修订版本
 
  - 2020-06-24 **Tag v0.0.1** Tag初始版本，实现了基本功能，添加了示例
