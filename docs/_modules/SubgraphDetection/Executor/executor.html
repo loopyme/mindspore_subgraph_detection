@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SubgraphDetection.Executor.executor &mdash; mindspore_subgraph_detection  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: 174C4F" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> mindspore_subgraph_detection
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">子图检测</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/introduction.html">项目介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/algorithm.html">算法简述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/usage.html">使用指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/result.html">测试结果</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/changelog.html">更新日志</a></li>
+</ul>
+<p class="caption"><span class="caption-text">APIs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/api/detect_subgraph.html">Detect subgraph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/api/datastructure.html">DataStructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/api/executor.html">Executor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/api/util.html">Utils</a></li>
+</ul>
+<p class="caption"><span class="caption-text">引用</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/reference.html">参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/dependencies.html">外部依赖</a></li>
+</ul>
+<p class="caption"><span class="caption-text">项目简述</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.html">HTML格式</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.pdf">PDF格式</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.pptx">PPT格式</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">mindspore_subgraph_detection</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>SubgraphDetection.Executor.executor</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for SubgraphDetection.Executor.executor</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This file is used to define the executor of subgraph detection process&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">as_completed</span>
+<span class="kn">from</span> <span class="nn">concurrent.futures.thread</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="fm">__add__</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">cpu_count</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Lock</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Deque</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="kn">from</span> <span class="nn">mindinsight.datavisual.common.log</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">mindinsight.datavisual.data_transform.graph</span> <span class="kn">import</span> <span class="n">MSGraph</span>
+
+<span class="kn">from</span> <span class="nn">SubgraphDetection.DataStructure</span> <span class="kn">import</span> <span class="n">SMSGraph</span><span class="p">,</span> <span class="n">SubgraphCore</span><span class="p">,</span> <span class="n">Subgraph</span><span class="p">,</span> <span class="n">SNode</span>
+<span class="kn">from</span> <span class="nn">SubgraphDetection.Executor.grow</span> <span class="kn">import</span> <span class="n">core_grow</span>
+<span class="kn">from</span> <span class="nn">SubgraphDetection.config</span> <span class="kn">import</span> <span class="n">CONFIG</span>
+
+
+<div class="viewcode-block" id="Executor"><a class="viewcode-back" href="../../../pages/api/executor.html#SubgraphDetection.Executor.executor.Executor">[docs]</a><span class="k">class</span> <span class="nc">Executor</span><span class="p">:</span>
+<div class="viewcode-block" id="Executor.__init__"><a class="viewcode-back" href="../../../pages/api/executor.html#SubgraphDetection.Executor.executor.Executor.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">SMSGraph</span><span class="p">,</span> <span class="n">MSGraph</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        init a subgraph detect executor</span>
+<span class="sd">        Args:</span>
+<span class="sd">            graph: The whole graph which executor working on</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check and store the whole graph</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">MSGraph</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">:</span> <span class="n">SMSGraph</span> <span class="o">=</span> <span class="n">SMSGraph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">SMSGraph</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">:</span> <span class="n">SMSGraph</span> <span class="o">=</span> <span class="n">graph</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;The subgraph detection executor obtains an unrecognized graph input of type &quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span><span class="si">}</span><span class="s1">&quot;,&#39;</span>
+                <span class="sa">f</span><span class="s2">&quot; which should be SMSGraph or MSGraph&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># muti-thread executor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_executor</span><span class="p">:</span> <span class="n">ThreadPoolExecutor</span> <span class="o">=</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span>
+            <span class="n">max_workers</span><span class="o">=</span><span class="n">CONFIG</span><span class="o">.</span><span class="n">MAX_WORKER</span> <span class="k">if</span> <span class="n">CONFIG</span><span class="o">.</span><span class="n">MAX_WORKER</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">cpu_count</span><span class="p">()</span>
+        <span class="p">)</span>
+
+        <span class="c1"># exclusive lock, useful when register the cores</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span> <span class="n">Lock</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">()</span>
+
+        <span class="c1"># all of the detected cores</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_registered_core</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="c1"># cores that waiting for grow</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_core_deque</span><span class="p">:</span> <span class="n">Deque</span><span class="p">[</span><span class="n">SubgraphCore</span><span class="p">]</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+
+        <span class="c1"># all of the detected graphs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_commit_subgraph</span><span class="p">:</span> <span class="n">Deque</span><span class="p">[</span><span class="n">Subgraph</span><span class="p">]</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+
+        <span class="c1"># level of the graph which we working at</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">get_max_level</span><span class="p">()</span> <span class="o">-</span> <span class="n">CONFIG</span><span class="o">.</span><span class="n">SKIPPED_LEVEL</span><span class="p">,</span> <span class="mi">1</span>
+        <span class="p">)</span>
+
+        <span class="c1"># nodes of the graph which we working at</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph_nodes</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">SNode</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span></div>
+
+    <span class="k">def</span> <span class="nf">get_subgraph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Deque</span><span class="p">[</span><span class="n">Subgraph</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_commit_subgraph</span>
+
+<div class="viewcode-block" id="Executor.run"><a class="viewcode-back" href="../../../pages/api/executor.html#SubgraphDetection.Executor.executor.Executor.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Deque</span><span class="p">[</span><span class="n">Subgraph</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run until every subgraph core is committed or destroyed</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Deque of subgraph, all the detected subgraphs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_level</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">next_level</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_subgraph</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">next_level</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">get_level_node</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_level</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_core_deque</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span>
+            <span class="nb">map</span><span class="p">(</span><span class="n">SubgraphCore</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">frequent_nodes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph_nodes</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_core_deque</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">CONFIG</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Level </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_level</span><span class="si">:</span><span class="s2">&gt;3</span><span class="si">}</span><span class="s2"> Epoch </span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">&gt;4</span><span class="si">}</span><span class="s2">: There are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_core_deque</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2"> cores growing in the current epoch&quot;</span>
+                <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">next_epoch</span><span class="p">()</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_level</span> <span class="o">-=</span> <span class="mi">1</span>
+
+<div class="viewcode-block" id="Executor.next_epoch"><a class="viewcode-back" href="../../../pages/api/executor.html#SubgraphDetection.Executor.executor.Executor.next_epoch">[docs]</a>    <span class="k">def</span> <span class="nf">next_epoch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Let all cores in core_deque grow to next epoch and update the core_deque&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_core_deque</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span>
+            <span class="fm">__add__</span><span class="p">,</span>
+            <span class="p">(</span>
+                <span class="n">grow_core</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">grow_core</span> <span class="ow">in</span> <span class="n">as_completed</span><span class="p">(</span>
+                <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">core_grow</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">core</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">core</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_core_deque</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_subgraph</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Executor.register_core"><a class="viewcode-back" href="../../../pages/api/executor.html#SubgraphDetection.Executor.executor.Executor.register_core">[docs]</a>    <span class="k">def</span> <span class="nf">register_core</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">core_ids</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Register the cores to avoid extra computation.</span>
+
+<span class="sd">        Notes:</span>
+<span class="sd">            If a core is registered, means it is already been computed or added to next epoch core deque.</span>
+<span class="sd">            This function should be exclusive, make sure to acquire the lock before.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            core_ids:   Tuple of core ids that should be checked</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple of bool, correspond to the input core_ids tuple.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">core_ids</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cid</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">core_ids</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">cid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_registered_core</span><span class="p">:</span>
+                <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_registered_core</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cid</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">res</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Executor.commit_core"><a class="viewcode-back" href="../../../pages/api/executor.html#SubgraphDetection.Executor.executor.Executor.commit_core">[docs]</a>    <span class="k">def</span> <span class="nf">commit_core</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">core</span><span class="p">:</span> <span class="n">SubgraphCore</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Let subgraph core commit itself to subgraph.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            core: subgraph core which is finish growing</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_commit_subgraph</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">core</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Executor.check_subgraph"><a class="viewcode-back" href="../../../pages/api/executor.html#SubgraphDetection.Executor.executor.Executor.check_subgraph">[docs]</a>    <span class="k">def</span> <span class="nf">check_subgraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if there are any sub-subgraph in self._commit_subgraph and delete the match.</span>
+<span class="sd">        Run after an epoch is finished.</span>
+
+<span class="sd">        Notes:</span>
+<span class="sd">            Penalty terms are imposed on sub-sub-graph in thresholds to avoid multiple level subgraphs</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">subgraph_size</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_commit_subgraph</span><span class="p">)</span>
+        <span class="n">subgraph_instance</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_commit_subgraph</span><span class="p">)</span>
+        <span class="n">subgraph_pattern</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">feature_nodes</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_commit_subgraph</span><span class="p">)</span>
+        <span class="n">remove_graph</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_commit_subgraph</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_commit_subgraph</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span> <span class="ow">or</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">remove_graph</span> <span class="ow">or</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">remove_graph</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">elif</span> <span class="p">(</span>
+                        <span class="n">subgraph_size</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">subgraph_size</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                        <span class="ow">and</span> <span class="n">subgraph_instance</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                        <span class="o">&gt;=</span> <span class="n">subgraph_instance</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                        <span class="o">-</span> <span class="n">CONFIG</span><span class="o">.</span><span class="n">SUB_SUB_GRAPH_THRESHOLD_PENALTY</span>
+                        <span class="o">*</span> <span class="p">(</span><span class="n">subgraph_size</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">subgraph_size</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                        <span class="ow">and</span> <span class="n">subgraph_pattern</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">subgraph_pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="p">)</span> <span class="ow">or</span> <span class="p">(</span>
+                        <span class="n">subgraph_size</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">subgraph_size</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                        <span class="ow">and</span> <span class="n">subgraph_instance</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                        <span class="o">&lt;=</span> <span class="n">subgraph_instance</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                        <span class="o">+</span> <span class="n">CONFIG</span><span class="o">.</span><span class="n">SUB_SUB_GRAPH_THRESHOLD_PENALTY</span>
+                        <span class="o">*</span> <span class="p">(</span><span class="n">subgraph_size</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">subgraph_size</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                        <span class="ow">and</span> <span class="n">subgraph_pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">subgraph_pattern</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="p">):</span>
+                    <span class="n">remove_graph</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_commit_subgraph</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span>
+            <span class="n">g</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_commit_subgraph</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">remove_graph</span>
+        <span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Peter
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

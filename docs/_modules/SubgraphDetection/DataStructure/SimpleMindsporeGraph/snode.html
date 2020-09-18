@@ -1,0 +1,259 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SubgraphDetection.DataStructure.SimpleMindsporeGraph.snode &mdash; mindspore_subgraph_detection  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: 174C4F" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> mindspore_subgraph_detection
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">子图检测</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/introduction.html">项目介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/algorithm.html">算法简述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/usage.html">使用指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/result.html">测试结果</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/changelog.html">更新日志</a></li>
+</ul>
+<p class="caption"><span class="caption-text">APIs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/api/detect_subgraph.html">Detect subgraph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/api/datastructure.html">DataStructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/api/executor.html">Executor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/api/util.html">Utils</a></li>
+</ul>
+<p class="caption"><span class="caption-text">引用</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/reference.html">参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/dependencies.html">外部依赖</a></li>
+</ul>
+<p class="caption"><span class="caption-text">项目简述</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.html">HTML格式</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.pdf">PDF格式</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.pptx">PPT格式</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">mindspore_subgraph_detection</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>SubgraphDetection.DataStructure.SimpleMindsporeGraph.snode</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for SubgraphDetection.DataStructure.SimpleMindsporeGraph.snode</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This file is used to define nodes in the simplified MindSpore graph.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
+
+
+<div class="viewcode-block" id="SNode"><a class="viewcode-back" href="../../../../pages/api/datastructure.html#SubgraphDetection.DataStructure.SNode">[docs]</a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">unsafe_hash</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">SNode</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A dataclass which stores all infos we need about nodes&quot;&quot;&quot;</span>
+
+    <span class="c1"># Unique id of a node,</span>
+    <span class="c1"># sometime we forged it (compare to the origin msgraph) to store infos about scope</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="c1"># The type of node/scope,</span>
+    <span class="c1"># sometimes it&#39;s generated randomly (Happened when DETAILED_ISOMORPHIC_CHECK is True)</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="c1"># Upstream or downstream of a node, note that it&#39;s the leaf node id.</span>
+    <span class="n">upstream</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="n">downstream</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+
+    <span class="c1"># Father scope of a node, which may not be store as a scope object.</span>
+    <span class="n">scope</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="c1"># Due to special needs, the levels here are counted from bottom to top.</span>
+    <span class="c1"># Level of one node/scope is the max of it&#39;s child node/scope level plus 1.</span>
+    <span class="c1"># For example, the level of the leaf node is 1.</span>
+    <span class="n">level</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="c1"># Origin name of node, useful when dump the result</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+
+<div class="viewcode-block" id="SNode.__repr__"><a class="viewcode-back" href="../../../../pages/api/datastructure.html#SubgraphDetection.DataStructure.SNode.__repr__">[docs]</a>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Node-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">&quot;</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Peter
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

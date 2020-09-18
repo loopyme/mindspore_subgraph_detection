@@ -1,0 +1,538 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SubgraphDetection.DataStructure.SimpleMindsporeGraph.smsgraph &mdash; mindspore_subgraph_detection  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: 174C4F" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> mindspore_subgraph_detection
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">子图检测</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/introduction.html">项目介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/algorithm.html">算法简述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/usage.html">使用指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/result.html">测试结果</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/changelog.html">更新日志</a></li>
+</ul>
+<p class="caption"><span class="caption-text">APIs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/api/detect_subgraph.html">Detect subgraph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/api/datastructure.html">DataStructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/api/executor.html">Executor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/api/util.html">Utils</a></li>
+</ul>
+<p class="caption"><span class="caption-text">引用</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/reference.html">参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/dependencies.html">外部依赖</a></li>
+</ul>
+<p class="caption"><span class="caption-text">项目简述</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.html">HTML格式</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.pdf">PDF格式</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.pptx">PPT格式</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">mindspore_subgraph_detection</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>SubgraphDetection.DataStructure.SimpleMindsporeGraph.smsgraph</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for SubgraphDetection.DataStructure.SimpleMindsporeGraph.smsgraph</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This file is used to define the simplified MindSpore graph.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Deque</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">mindinsight.datavisual.data_transform.graph</span> <span class="kn">import</span> <span class="n">MSGraph</span>
+<span class="kn">from</span> <span class="nn">mindinsight.datavisual.data_transform.graph.node</span> <span class="kn">import</span> <span class="n">NodeTypeEnum</span>
+
+<span class="kn">from</span> <span class="nn">SubgraphDetection.DataStructure.SimpleMindsporeGraph.scope</span> <span class="kn">import</span> <span class="n">Scope</span>
+<span class="kn">from</span> <span class="nn">SubgraphDetection.DataStructure.SimpleMindsporeGraph.snode</span> <span class="kn">import</span> <span class="n">SNode</span>
+<span class="kn">from</span> <span class="nn">SubgraphDetection.config</span> <span class="kn">import</span> <span class="n">CONFIG</span>
+
+
+<div class="viewcode-block" id="SMSGraph"><a class="viewcode-back" href="../../../../pages/api/datastructure.html#SubgraphDetection.DataStructure.SMSGraph">[docs]</a><span class="k">class</span> <span class="nc">SMSGraph</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;This object describes the simplified MindSpore graph, and it is used for subgraph detection.&quot;&quot;&quot;</span>
+
+    <span class="n">non_normal_node_type</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">NodeTypeEnum</span><span class="o">.</span><span class="n">NAME_SCOPE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">NodeTypeEnum</span><span class="o">.</span><span class="n">AGGREGATION_SCOPE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">NodeTypeEnum</span><span class="o">.</span><span class="n">PARAMETER</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">NodeTypeEnum</span><span class="o">.</span><span class="n">CONST</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="p">]</span>
+
+<div class="viewcode-block" id="SMSGraph.__init__"><a class="viewcode-back" href="../../../../pages/api/datastructure.html#SubgraphDetection.DataStructure.SMSGraph.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">:</span> <span class="n">MSGraph</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Init a SMSGraph with a MSGraph object</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            graph: The MSGraph required to be parsed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Store all normal type snodes, and the key is node id, value is `SNode` object.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_normal_node</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">SNode</span><span class="p">]</span>
+
+        <span class="c1"># Store info about name scopes, useful when hierarchical detect,</span>
+        <span class="c1"># the key is scope name, value is `Scope` object.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scope_node</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Scope</span><span class="p">]</span>
+
+        <span class="c1"># Store info about parameter&amp;const nodes, useful when hierarchical detect,</span>
+        <span class="c1"># the key is nodes id, value is `SNode` object.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_node</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Scope</span><span class="p">]</span>
+
+        <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_normal_node</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_scope_node</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_node</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="n">SMSGraph</span><span class="o">.</span><span class="n">parse_MSGraph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+        <span class="c1"># Nodes with larger index are name scopes (They are actually forged to be a normal nodes)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scope_index</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_normal_node</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+        <span class="c1"># Run scope isomorphism check</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_scope</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="SMSGraph.parse_MSGraph"><a class="viewcode-back" href="../../../../pages/api/datastructure.html#SubgraphDetection.DataStructure.SMSGraph.parse_MSGraph">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">parse_MSGraph</span><span class="p">(</span>
+            <span class="n">msgraph</span><span class="p">:</span> <span class="n">MSGraph</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">SNode</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Scope</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">SNode</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parse a MSGraph to SMSGraph</span>
+
+<span class="sd">        Notes:</span>
+<span class="sd">            In this function, We assigned id to every node-like object,</span>
+<span class="sd">            even the scope_node &amp; parameter_node.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            msgraph: The MSGraph required to be parsed</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            normal_node: all normal(defined by non_normal_node_type) snodes,</span>
+<span class="sd">                        and the key is node id, value is `SNode` object.</span>
+<span class="sd">            scope_node: all name scope nodes that we created,</span>
+<span class="sd">                        and the key is scope name, value is `Scope` object.</span>
+<span class="sd">            parameter_node: all parameter and const nodes,</span>
+<span class="sd">                        and the key is node id, value is `SNode` object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">node_map</span> <span class="o">=</span> <span class="n">msgraph</span><span class="o">.</span><span class="n">_normal_node_map</span>
+
+        <span class="c1"># re-assign node id</span>
+        <span class="n">node_index</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">node_map</span><span class="o">.</span><span class="n">keys</span><span class="p">())}</span>
+        <span class="n">get_node_id</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="n">node_index</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+        <span class="n">parameter_node</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">get_node_id</span><span class="p">(</span><span class="n">name</span><span class="p">):</span> <span class="n">SNode</span><span class="p">(</span>
+                <span class="nb">id</span><span class="o">=</span><span class="n">get_node_id</span><span class="p">(</span><span class="n">name</span><span class="p">),</span>
+                <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;parameter&quot;</span> <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="o">-</span><span class="mi">2</span> <span class="k">else</span> <span class="s2">&quot;const&quot;</span><span class="p">,</span>
+                <span class="n">upstream</span><span class="o">=</span><span class="p">(),</span>
+                <span class="n">downstream</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">get_node_id</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">keys</span><span class="p">())),</span>
+                <span class="n">scope</span><span class="o">=</span><span class="n">name</span><span class="p">[:</span> <span class="n">name</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)],</span>
+                <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">node_map</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">(</span><span class="n">NodeTypeEnum</span><span class="o">.</span><span class="n">PARAMETER</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">NodeTypeEnum</span><span class="o">.</span><span class="n">CONST</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="c1"># (id, type, upstream, downstream, scope) is all that we need</span>
+        <span class="n">normal_node</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">get_node_id</span><span class="p">(</span><span class="n">name</span><span class="p">):</span> <span class="n">SNode</span><span class="p">(</span>
+                <span class="nb">id</span><span class="o">=</span><span class="n">get_node_id</span><span class="p">(</span><span class="n">name</span><span class="p">),</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+                <span class="n">upstream</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">get_node_id</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">keys</span><span class="p">())),</span>
+                <span class="n">downstream</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">get_node_id</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">keys</span><span class="p">())),</span>
+                <span class="n">scope</span><span class="o">=</span><span class="n">name</span><span class="p">[:</span> <span class="n">name</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)],</span>
+                <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">node_map</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SMSGraph</span><span class="o">.</span><span class="n">non_normal_node_type</span>
+        <span class="p">}</span>
+
+        <span class="n">scope_node</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="n">Scope</span><span class="p">(</span>
+                <span class="nb">id</span><span class="o">=</span><span class="n">get_node_id</span><span class="p">(</span><span class="n">name</span><span class="p">),</span>
+                <span class="n">upstream</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">get_node_id</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">keys</span><span class="p">())),</span>
+                <span class="n">downstream</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">get_node_id</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">keys</span><span class="p">())),</span>
+                <span class="n">scope</span><span class="o">=</span><span class="n">name</span><span class="p">[:</span> <span class="n">name</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)],</span>
+                <span class="n">member</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">level</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">node_map</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">NodeTypeEnum</span><span class="o">.</span><span class="n">NAME_SCOPE</span><span class="o">.</span><span class="n">value</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">normal_node</span><span class="p">,</span> <span class="n">scope_node</span><span class="p">,</span> <span class="n">parameter_node</span></div>
+
+<div class="viewcode-block" id="SMSGraph.frequent_nodes"><a class="viewcode-back" href="../../../../pages/api/datastructure.html#SubgraphDetection.DataStructure.SMSGraph.frequent_nodes">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">frequent_nodes</span><span class="p">(</span><span class="n">nodes</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">SNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Deque</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">SNode</span><span class="p">,</span> <span class="o">...</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Count the frequent nodes and return a deque of node tuples, which may be used to build subgraph core later</span>
+<span class="sd">        Those node whose occurrences less than MIN_SUBGRAPH_INSTANCE_NUMBER will not returned</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nodes: Nodes that we are counting</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Each tuple contains same-type nodes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">count_res</span><span class="p">:</span> <span class="n">Deque</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">SNode</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+
+        <span class="c1"># sort node by type</span>
+        <span class="n">sorted_node_map</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SNode</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="n">nodes</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+
+        <span class="c1"># count it</span>
+        <span class="n">temp_type</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">node_buffer</span><span class="p">:</span> <span class="n">Deque</span><span class="p">[</span><span class="n">SNode</span><span class="p">]</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">sorted_node_map</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="n">temp_type</span><span class="p">:</span>
+                <span class="c1"># different type from later one</span>
+                <span class="n">temp_type</span> <span class="o">=</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">type</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_buffer</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">CONFIG</span><span class="o">.</span><span class="n">MIN_SUBGRAPH_INSTANCE_NUMBER</span><span class="p">:</span>
+                    <span class="n">count_res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">node_buffer</span><span class="p">))</span>
+
+                <span class="n">node_buffer</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+            <span class="n">node_buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># check the remaining ones</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_buffer</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">CONFIG</span><span class="o">.</span><span class="n">MIN_SUBGRAPH_INSTANCE_NUMBER</span><span class="p">:</span>
+            <span class="n">count_res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">node_buffer</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">count_res</span></div>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SNode</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normal_node</span><span class="p">[</span><span class="n">node_id</span><span class="p">]</span>
+
+<div class="viewcode-block" id="SMSGraph.get_node_count"><a class="viewcode-back" href="../../../../pages/api/datastructure.html#SubgraphDetection.DataStructure.SMSGraph.get_node_count">[docs]</a>    <span class="k">def</span> <span class="nf">get_node_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Count the number of nodes&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_normal_node</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_parameter_node</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SMSGraph._check_scope"><a class="viewcode-back" href="../../../../pages/api/datastructure.html#SubgraphDetection.DataStructure.SMSGraph._check_scope">[docs]</a>    <span class="k">def</span> <span class="nf">_check_scope</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run scope isomorphism check and fill in the scope info (level, type &amp; member)&quot;&quot;&quot;</span>
+
+        <span class="c1"># figure out the member nodes of scopes</span>
+        <span class="n">scope_member_buffer</span> <span class="o">=</span> <span class="p">{</span><span class="n">scope_name</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">scope_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scope_node</span><span class="o">.</span><span class="n">keys</span><span class="p">()}</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normal_node</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">scope</span> <span class="ow">in</span> <span class="n">scope_member_buffer</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">scope_member_buffer</span><span class="p">[</span><span class="n">n</span><span class="o">.</span><span class="n">scope</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scope_node</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">scope</span> <span class="ow">in</span> <span class="n">scope_member_buffer</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">scope_member_buffer</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">scope</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">scope_member_buffer</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_scope_node</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">member</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">member</span><span class="p">)</span>
+
+        <span class="c1"># figure out the level</span>
+        <span class="c1"># Use a monkey patch to force all scope node update their level recursively</span>
+        <span class="n">scope_node_id_name</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">scope</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">scope</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scope_node</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
+
+        <span class="k">def</span> <span class="nf">get_level</span><span class="p">(</span><span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            A recursive function, used to update the current node level according to the node tree</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">                None</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="n">scope</span><span class="o">.</span><span class="n">level</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">member_level</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_normal_node</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">level</span>
+                    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normal_node</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+                    <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scope_node</span><span class="p">[</span><span class="n">scope_node_id_name</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">get_level</span><span class="p">()</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">scope</span><span class="o">.</span><span class="n">member</span>
+                <span class="p">)</span>
+                <span class="c1"># TODO: This is weird, why is there some scope without members?</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">member_level</span><span class="p">:</span>
+                    <span class="n">scope</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">scope</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">member_level</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">scope</span><span class="o">.</span><span class="n">level</span>
+
+        <span class="n">Scope</span><span class="o">.</span><span class="n">get_level</span> <span class="o">=</span> <span class="n">get_level</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scope_node</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">s</span><span class="o">.</span><span class="n">get_level</span><span class="p">()</span>
+        <span class="k">del</span> <span class="n">Scope</span><span class="o">.</span><span class="n">get_level</span>  <span class="c1"># revoke monkey patch</span>
+
+        <span class="c1"># figure out the type</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">CONFIG</span><span class="o">.</span><span class="n">DETAILED_ISOMORPHIC_CHECK</span><span class="p">:</span>
+            <span class="c1"># only the scope with the same name will be treated as isomorphism</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">scope</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scope_node</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">scope</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">name</span><span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># isomorphism check: check level, size and connected node count</span>
+            <span class="c1"># TODO: detailed isomorphism check (very expensive, may be unnecessary)</span>
+            <span class="n">scope_basic_info_buffer</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">scope_name</span><span class="p">:</span> <span class="nb">hash</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{level}</span><span class="s2">-</span><span class="si">{size}</span><span class="s2">-</span><span class="si">{upstream}</span><span class="s2">-</span><span class="si">{downstream}</span><span class="s2">-</span><span class="si">{upstream_type}</span><span class="s2">-</span><span class="si">{downstream_hash}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">level</span><span class="o">=</span><span class="n">scope_name</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">),</span>
+                    <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">scope</span><span class="o">.</span><span class="n">member</span><span class="p">),</span>
+                    <span class="n">upstream</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">scope</span><span class="o">.</span><span class="n">upstream</span><span class="p">),</span>
+                    <span class="n">downstream</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">scope</span><span class="o">.</span><span class="n">downstream</span><span class="p">),</span>
+                    <span class="n">upstream_type</span><span class="o">=</span><span class="nb">hash</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_normal_node</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">type</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">scope</span><span class="o">.</span><span class="n">upstream</span><span class="p">)),</span>
+                    <span class="n">downstream_hash</span><span class="o">=</span><span class="nb">hash</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_normal_node</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">type</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">scope</span><span class="o">.</span><span class="n">downstream</span><span class="p">)),</span>
+                <span class="p">))</span>
+                <span class="k">for</span> <span class="n">scope_name</span><span class="p">,</span> <span class="n">scope</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scope_node</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="n">isomorphic_scope_candidate</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">scope_basic_info_buffer_reverse</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">scope_id</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">scope_basic_info_buffer</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">info</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">scope_basic_info_buffer_reverse</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">scope_basic_info_buffer_reverse</span><span class="p">[</span><span class="n">info</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">scope_id</span>
+                    <span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">scope_basic_info_buffer_reverse</span><span class="p">[</span><span class="n">info</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="n">scope_id</span>
+                    <span class="p">)</span>
+            <span class="k">for</span> <span class="n">info</span><span class="p">,</span> <span class="n">scope_ids</span> <span class="ow">in</span> <span class="n">scope_basic_info_buffer_reverse</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">scope_ids</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">isomorphic_scope_candidate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scope_ids</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="n">isomorphic_scope_candidate</span><span class="p">:</span>
+                <span class="n">scope_type</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="n">candidate</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">candidate</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_scope_node</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">scope_type</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SMSGraph.get_level_node"><a class="viewcode-back" href="../../../../pages/api/datastructure.html#SubgraphDetection.DataStructure.SMSGraph.get_level_node">[docs]</a>    <span class="k">def</span> <span class="nf">get_level_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">SNode</span><span class="p">,</span> <span class="n">Scope</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a projection of a certain level of whole graph</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            level: which level are we dealing with</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Node dict of the certain level</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">level</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># TODO: maybe we should remove some node to avoid sub-sub-graph</span>
+            <span class="n">node_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normal_node</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">node_set</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_parameter_node</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">node_set</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">scope</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">scope</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">scope</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scope_node</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">scope</span><span class="o">.</span><span class="n">level</span> <span class="o">==</span> <span class="n">level</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">node_set</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">{}</span>
+
+            <span class="c1"># redirect the scope upstream and downstream</span>
+            <span class="k">def</span> <span class="nf">get_node_scope</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">SNode</span><span class="p">,</span> <span class="n">target_level</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Scope</span><span class="p">:</span>
+                <span class="n">n_level</span><span class="p">,</span> <span class="n">n_scope</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">level</span><span class="p">,</span> <span class="n">node</span>
+                <span class="k">while</span> <span class="n">n_level</span> <span class="o">&lt;</span> <span class="n">target_level</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">scope</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scope_node</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="n">n_scope</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scope_node</span><span class="p">[</span><span class="n">n_scope</span><span class="o">.</span><span class="n">scope</span><span class="p">]</span>
+                        <span class="n">n_level</span> <span class="o">=</span> <span class="n">n_scope</span><span class="o">.</span><span class="n">level</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">n_scope</span> <span class="o">=</span> <span class="kc">None</span>
+                        <span class="k">break</span>
+                <span class="k">if</span> <span class="n">n_level</span> <span class="o">&gt;</span> <span class="n">target_level</span><span class="p">:</span>
+                    <span class="n">n_scope</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">return</span> <span class="n">n_scope</span><span class="o">.</span><span class="n">id</span> <span class="k">if</span> <span class="n">n_scope</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+
+            <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">node_set</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">n</span><span class="o">.</span><span class="n">upstream</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
+                    <span class="n">get_node_scope</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_normal_node</span><span class="p">[</span><span class="n">node_id</span><span class="p">],</span> <span class="n">level</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">node_id</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">upstream</span>
+                <span class="p">)</span>
+                <span class="n">n</span><span class="o">.</span><span class="n">downstream</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
+                    <span class="n">get_node_scope</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_normal_node</span><span class="p">[</span><span class="n">node_id</span><span class="p">],</span> <span class="n">level</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">node_id</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">downstream</span>
+                <span class="p">)</span>
+                <span class="n">n</span><span class="o">.</span><span class="n">upstream</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">upstream</span><span class="p">)))</span>
+                <span class="n">n</span><span class="o">.</span><span class="n">downstream</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">downstream</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">node_set</span></div>
+
+<div class="viewcode-block" id="SMSGraph.get_max_level"><a class="viewcode-back" href="../../../../pages/api/datastructure.html#SubgraphDetection.DataStructure.SMSGraph.get_max_level">[docs]</a>    <span class="k">def</span> <span class="nf">get_max_level</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the max level of the graph scope nodes</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            max level</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">scope</span><span class="o">.</span><span class="n">level</span> <span class="k">for</span> <span class="n">scope</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scope_node</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Peter
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

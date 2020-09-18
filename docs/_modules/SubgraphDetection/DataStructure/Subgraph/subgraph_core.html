@@ -1,0 +1,369 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SubgraphDetection.DataStructure.Subgraph.subgraph_core &mdash; mindspore_subgraph_detection  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: 174C4F" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> mindspore_subgraph_detection
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">子图检测</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/introduction.html">项目介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/algorithm.html">算法简述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/usage.html">使用指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/result.html">测试结果</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/changelog.html">更新日志</a></li>
+</ul>
+<p class="caption"><span class="caption-text">APIs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/api/detect_subgraph.html">Detect subgraph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/api/datastructure.html">DataStructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/api/executor.html">Executor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/api/util.html">Utils</a></li>
+</ul>
+<p class="caption"><span class="caption-text">引用</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/reference.html">参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pages/dependencies.html">外部依赖</a></li>
+</ul>
+<p class="caption"><span class="caption-text">项目简述</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.html">HTML格式</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.pdf">PDF格式</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.pptx">PPT格式</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">mindspore_subgraph_detection</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>SubgraphDetection.DataStructure.Subgraph.subgraph_core</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for SubgraphDetection.DataStructure.Subgraph.subgraph_core</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This file is used to define subgraph core in the simplified MindSpore graph.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Deque</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">SubgraphDetection.DataStructure</span> <span class="kn">import</span> <span class="n">SNode</span><span class="p">,</span> <span class="n">Subgraph</span>
+<span class="kn">from</span> <span class="nn">SubgraphDetection.config</span> <span class="kn">import</span> <span class="n">CONFIG</span>
+
+
+<div class="viewcode-block" id="SubgraphCore"><a class="viewcode-back" href="../../../../pages/api/datastructure.html#SubgraphDetection.DataStructure.SubgraphCore">[docs]</a><span class="k">class</span> <span class="nc">SubgraphCore</span><span class="p">(</span><span class="n">Subgraph</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The growing core of subgraph&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SubgraphCore.__init__"><a class="viewcode-back" href="../../../../pages/api/datastructure.html#SubgraphDetection.DataStructure.SubgraphCore.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">SNode</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="kc">None</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Init a SubgraphCore with a tuple of Snode.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nodes : The initial nodes, which should be all in same type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">nodes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># return null obj</span>
+            <span class="k">return</span>
+
+        <span class="n">core_pattern</span><span class="p">:</span> <span class="n">Deque</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+        <span class="n">core_pattern</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+        <span class="n">core_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">deque</span><span class="p">((</span><span class="n">n</span><span class="p">,))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">]</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">pattern</span><span class="o">=</span><span class="n">core_pattern</span><span class="p">,</span>
+            <span class="n">nodes</span><span class="o">=</span><span class="n">core_nodes</span><span class="p">,</span>
+            <span class="n">min_node</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">nodes</span><span class="p">),</span>
+            <span class="n">min_node_index</span><span class="o">=</span><span class="n">nodes</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">nodes</span><span class="p">)),</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Holds the index of all the boundary pattern items, only these items will be traversed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__boundary_pattern_index</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pattern</span><span class="p">)))</span>
+
+        <span class="c1"># Iter of set boundary_pattern_index, useful when executing traversal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pointer</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="SubgraphCore.__next__"><a class="viewcode-back" href="../../../../pages/api/datastructure.html#SubgraphDetection.DataStructure.SubgraphCore.__next__">[docs]</a>    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Traverse to get the equivalent-nodes-tuple in subgraph instance</span>
+
+<span class="sd">        Notes:</span>
+<span class="sd">            only these nodes whose id in boundary_nodes will be traversed</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            equivalent nodes tuple</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pointer</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nodes</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SubgraphCore.__iter__"><a class="viewcode-back" href="../../../../pages/api/datastructure.html#SubgraphDetection.DataStructure.SubgraphCore.__iter__">[docs]</a>    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a iter of the equivalent nodes in subgraph instance</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            self</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pointer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__boundary_pattern_index</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="SubgraphCore.grow"><a class="viewcode-back" href="../../../../pages/api/datastructure.html#SubgraphDetection.DataStructure.SubgraphCore.grow">[docs]</a>    <span class="k">def</span> <span class="nf">grow</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">node_pattern</span><span class="p">:</span> <span class="n">Deque</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+            <span class="n">grow_nodes</span><span class="p">:</span> <span class="n">Deque</span><span class="p">[</span><span class="n">Deque</span><span class="p">[</span><span class="n">SNode</span><span class="p">]],</span>
+            <span class="n">keep_instance_index</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Let the core grow</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            node_pattern: The type of new nodes</span>
+<span class="sd">            grow_nodes: The new nodes</span>
+<span class="sd">            keep_instance_index: Which instances is going to keep</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The new core grow from self</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># do some copy</span>
+        <span class="n">new_core</span> <span class="o">=</span> <span class="n">SubgraphCore</span><span class="p">(</span><span class="n">nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">new_core</span><span class="o">.</span><span class="n">_pattern</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pattern</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="o">+</span> <span class="n">node_pattern</span>
+
+        <span class="c1"># update the nodes and boundary patterns</span>
+        <span class="n">new_core</span><span class="o">.</span><span class="n">_nodes</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_nodes</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="n">deque</span><span class="p">(</span><span class="n">grow_nodes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">keep_instance_index</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="c1"># mark the boundary(undetected) pattern</span>
+        <span class="n">new_core</span><span class="o">.</span><span class="n">__boundary_pattern_index</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span>
+            <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pattern</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_core</span><span class="o">.</span><span class="n">_pattern</span><span class="p">))</span>
+        <span class="p">)</span>
+
+        <span class="c1"># clear the pointer and _id</span>
+        <span class="n">new_core</span><span class="o">.</span><span class="n">__pointer</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">new_core</span><span class="o">.</span><span class="n">_id</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># update the min_node info</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_node_index</span> <span class="ow">in</span> <span class="n">keep_instance_index</span><span class="p">:</span>
+            <span class="n">new_core</span><span class="o">.</span><span class="n">_min_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_node</span>
+            <span class="n">new_core</span><span class="o">.</span><span class="n">_min_node_index</span> <span class="o">=</span> <span class="n">keep_instance_index</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_min_node_index</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">min_node_in_instance</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span> <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="n">new_core</span><span class="o">.</span><span class="n">_nodes</span><span class="p">)</span>
+            <span class="n">new_core</span><span class="o">.</span><span class="n">_min_node</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">min_node_in_instance</span><span class="p">)</span>
+            <span class="n">new_core</span><span class="o">.</span><span class="n">_min_node_index</span> <span class="o">=</span> <span class="n">min_node_in_instance</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">new_core</span><span class="o">.</span><span class="n">_min_node</span><span class="p">)</span>
+
+        <span class="c1"># update the minimum-id node info</span>
+        <span class="n">new_min_node_in_instance</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">grow_nodes</span><span class="p">)</span>
+        <span class="n">new_min_node</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">new_min_node_in_instance</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">new_min_node</span> <span class="o">&lt;</span> <span class="n">new_core</span><span class="o">.</span><span class="n">_min_node</span><span class="p">:</span>
+            <span class="n">new_core</span><span class="o">.</span><span class="n">_min_node</span> <span class="o">=</span> <span class="n">new_min_node</span>
+            <span class="n">new_core</span><span class="o">.</span><span class="n">_min_node_index</span> <span class="o">=</span> <span class="n">new_min_node_in_instance</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">new_min_node</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">new_core</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_valid_for_commit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check whether if self is valid subgraph&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span>
+                <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nodes</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">CONFIG</span><span class="o">.</span><span class="n">MIN_SUBGRAPH_INSTANCE_NUMBER</span>
+                <span class="ow">and</span> <span class="n">CONFIG</span><span class="o">.</span><span class="n">MIN_SUBGRAPH_NODE_NUMBER</span>
+                <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="o">&lt;=</span> <span class="n">CONFIG</span><span class="o">.</span><span class="n">MAX_SUBGRAPH_NODE_NUMBER</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="SubgraphCore.commit"><a class="viewcode-back" href="../../../../pages/api/datastructure.html#SubgraphDetection.DataStructure.SubgraphCore.commit">[docs]</a>    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Commit the core after finish growing</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            self</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pointer</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__boundary_pattern_index</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_node</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="SubgraphCore.__repr__"><a class="viewcode-back" href="../../../../pages/api/datastructure.html#SubgraphDetection.DataStructure.SubgraphCore.__repr__">[docs]</a>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;SubGraphCore-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="si">}</span><span class="s2">*</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Peter
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>theme: gaia _class: lead paginate: true backgroundColor: #fff backgroundImage: url(‘https://marp.app/assets/hero-background.jpg’) header: 深度学习模型计算图相同子结构的识别和展示 &mdash; mindspore_subgraph_detection  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: 174C4F" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> mindspore_subgraph_detection
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">子图检测</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">项目介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithm.html">算法简述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">使用指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="result.html">测试结果</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">更新日志</a></li>
+</ul>
+<p class="caption"><span class="caption-text">APIs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/detect_subgraph.html">Detect subgraph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/datastructure.html">DataStructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/executor.html">Executor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/util.html">Utils</a></li>
+</ul>
+<p class="caption"><span class="caption-text">引用</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">外部依赖</a></li>
+</ul>
+<p class="caption"><span class="caption-text">项目简述</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.html">HTML格式</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.pdf">PDF格式</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.pptx">PPT格式</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mindspore_subgraph_detection</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>theme: gaia
+_class: lead
+paginate: true
+backgroundColor: #fff
+backgroundImage: url(‘https://marp.app/assets/hero-background.jpg’)
+header: 深度学习模型计算图相同子结构的识别和展示</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pages/algorithm-PPT.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <hr class="docutils" />
+<div class="section" id="theme-gaia-class-lead-paginate-true-backgroundcolor-fff-backgroundimage-url-https-marp-app-assets-hero-background-jpg-header">
+<h1>theme: gaia
+_class: lead
+paginate: true
+backgroundColor: #fff
+backgroundImage: url(‘https://marp.app/assets/hero-background.jpg’)
+header: 深度学习模型计算图相同子结构的识别和展示<a class="headerlink" href="#theme-gaia-class-lead-paginate-true-backgroundcolor-fff-backgroundimage-url-https-marp-app-assets-hero-background-jpg-header" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="fit">
+<h1><!-- fit -->深度学习模型计算图相同子结构的识别和展示<a class="headerlink" href="#fit" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>本项目受到 <a class="reference external" href="https://isrc.iscas.ac.cn/summer2020/#/index">“开源软件供应链点亮计划-暑期2020” </a> 的资助和支持,由peter&#64;mail.loopy.tech设计开发，由gaohan19&#64;huawei.com指导。</p>
+</div></blockquote>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>1. 简介<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>MindSpore是华为自研的深度学习框架，其中的计算图模式是一种业界主流的用来进行数据传递与计算的形式。计算图主要包含节点和有向边，节点表示计算和控制操作，边表示数据的流向和控制等关系。计算图的高效合理展示，有助于用户更好的理解模型结构、发现和调试模型训练过程中出现的问题。然而，大型深度学习模型往往有着复杂的计算图结构，包含有成千上万个节点和更多的边。在这些点和边之中，包含有许多结构相同或高度相似的子结构，这些子结构不仅从图的拓扑结构上，甚至从深度学习语义上具有高度的相似性。快速识别大型计算图中上述的相同子结构，能够支持后续用收折、重叠等方式大幅减少页面中同时呈现的节点和边的数目，从而大幅改善计算图的展示效果。</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="id2">
+<h2>2. 为什么需要新算法？<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>当前应用情景与常规子图挖掘大不相同：</p>
+<ul class="simple">
+<li><p>度量方式：支持度变得不那么重要，而应以压缩输入图的程度来度量</p></li>
+<li><p>单图挖掘：在单个大图中寻找子图，而不是多个小图</p></li>
+<li><p>有向无环图：计算图是有向无环图</p></li>
+<li><p>无边权：计算图的所有边都是相同的</p></li>
+<li><p>算法级并行：在并行场景下能快速稳定执行</p></li>
+<li><p>层次化算子节点：计算图中的各个算子节点是具有层级的</p></li>
+</ul>
+<p>由此，我们基于Apriori思想改进了现有的频繁子图挖掘算法，并使用Python进行了编码实现</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="id3">
+<h2>3. 算法简述<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>本项目分为两个模块，分别用于形成节点集和在特定节点集中进行子图挖掘。</p>
+<p>整个算法基于一个基本的事实规律：<strong>频繁子图的任意子图或子节点都是频繁的</strong>。由此，我们只需要找到频繁的节点，并由频繁的节点开始进行聚合和生长，就能找到需要的频繁子图。</p>
+<hr class="docutils" />
+<div class="section" id="id4">
+<h3>3.1. 节点集形成算法<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>节点集形成算法就是从所有节点中筛选出某个特定层级的节点，形成待挖掘的节点集。主要难度在于，各个节点存储的上下游节点都是level-1的节点，为了在筛选中保持图的结构，需要将上下游节点重定向至特定层级的节点，需要递归的查询各个节点的符合要求的祖先。</p>
+<p>右侧给出了算法伪代码：
+<img alt="bg right:35% 85%" src="https://loopyme.gitee.io/mindspore_subgraph_detection/_images/algorithm-1.png" /></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="id5">
+<h3>3.2. 子图挖掘算法<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>本项目所使用的子图挖掘算法，基于Apriori思想进行改进，使用“自下而上”的方法，首先生成单节点的核，核进行多次生长，每次生长后移除原来的核，当所有核都生长为子图集后，算法终止。</p>
+<p>右侧给出了算法伪代码：
+<img alt="bg right:40% 80%" src="https://loopyme.gitee.io/mindspore_subgraph_detection/_images/algorithm-2.png" /></p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="id6">
+<h2>4. 实现<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>以下简述算法的实现的相关思路和方式</p>
+<hr class="docutils" />
+<div class="section" id="id7">
+<h3>4.1. 数据结构<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id8">
+<h4>4.1.1 节点<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<p><strong>节点</strong>由<code class="docutils literal notranslate"><span class="pre">SNode</span></code>类所定义的数据结构存储，每个节点既保存了上下游节点（保存计算图中的联系），也保存了自己所属的命名空间（保存节点树中的联系）。<code class="docutils literal notranslate"><span class="pre">Scope</span></code>类继承自<code class="docutils literal notranslate"><span class="pre">SNode</span></code>，在其基础上，<code class="docutils literal notranslate"><span class="pre">Scope</span></code>还额外存储了自己的组成节点。为了避免循环引用，<code class="docutils literal notranslate"><span class="pre">SNode</span></code>和<code class="docutils literal notranslate"><span class="pre">Scope</span></code>在存储其它节点时，只存储了ID，具体节点信息需要到<code class="docutils literal notranslate"><span class="pre">SMSGraph</span></code>中去查询。同时，它们的设计采用了鸭子类型的风格，在子图挖掘阶段，两种类型的实例是等效的。</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="id9">
+<h4>4.1.2 计算图<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<p><strong>计算图</strong>由<code class="docutils literal notranslate"><span class="pre">SMSGraph</span></code>类所定义的数据结构存储，它保存了一个计算图中的全部信息，并提供了丰富的接口以接受各种查询。它的另一个主要功能是解析<code class="docutils literal notranslate"><span class="pre">MSGraph</span></code>对象，将其数据按本项目设计的方式整理和清洗。</p>
+<p><strong>子图的层次结构</strong>没有专门的类定义存储，而是使用节点存储的信息结合计算图的查询接口完成查询。在需要递归建树或查询时，使用猴子补丁的方式，将函数临时附加到节点类上，以完成需要的功能。</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="id10">
+<h4>4.1.4 子图<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
+<p><strong>子图</strong>相关信息由<code class="docutils literal notranslate"><span class="pre">Subgraph</span></code>类所定义的数据结构存储（生长时为<code class="docutils literal notranslate"><span class="pre">SubgraphCore</span></code>），与大多数编码实现不同，本项目中的图没有保存边的关系，而是按序保存了节点的关系，即子图模式。在子图挖掘中，核（子图核集）为核心数据结构，所有调度和控制都围绕着核展开。比如<code class="docutils literal notranslate"><span class="pre">Node1(biaAdd)-&gt;Node2(Conv2D)</span></code>与<code class="docutils literal notranslate"><span class="pre">Node3(biaAdd)-&gt;Node4(Conv2D)</span></code>同构，则子图核集保存的是<code class="docutils literal notranslate"><span class="pre">{pattern:['biaAdd',</span> <span class="pre">'Conv2D']，nodes:[(1,2),</span> <span class="pre">(3,4)]}</span></code>，ID为<code class="docutils literal notranslate"><span class="pre">hash(&quot;1-2&quot;)</span></code>.为了保证核模式在遍历时只遍历边界点，并减少功能耦合，核可以作为迭代器，只有边界点会被遍历取得。</p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="id11">
+<h3>4.2. 并行调度与执行<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>为了充分使用硬件并加快速度，子图挖掘部分算法执行采用Map-Reduce机制，执行器中的计算池存储着前一生长周期被提出的核，通过线程池调度的方式进行生长计算，从而获得下一生长周期的新计算池。每个核的生命周期都为一个生长周期，在生长周期结束后可能被销毁或拷贝提交。同时使用了子图核集的注册机制以避免冗余计算，每一子图核集(除单节点的外)在被提出时都需要通过执行器进行注册(注册需要是线程安全的)，冗余的核将不被加入计算池。</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="id12">
+<h3>4.3. 用户使用<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>本项目可以按照Python Package的标准进行分发和安装，具体安装方式见<a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/pages/usage.html#id2">安装指南</a></p></li>
+<li><p>同时也已实现命令行运行接口，具体安装方式见<a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/pages/usage.html#id3">使用指南</a></p></li>
+</ul>
+<p><img alt="bg left:40% 80%" src="https://loopyme.gitee.io/mindspore_subgraph_detection/_images/console_run.png" /></p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="id13">
+<h2>5. 其他相关链接<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/pages/api/detect_subgraph.html">API文档</a></p></li>
+<li><p><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/pages/changelog.html">更新日志</a></p></li>
+<li><p><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/pages/result.html">测试结果</a></p></li>
+<li><p><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/pages/reference.html">参考文献</a></p></li>
+<li><p><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/pages/dependencies.html">外部依赖</a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Peter
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

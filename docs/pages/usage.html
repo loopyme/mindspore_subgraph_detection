@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>使用指南 &mdash; mindspore_subgraph_detection  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="测试结果" href="result.html" />
+    <link rel="prev" title="算法简述" href="algorithm.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: 174C4F" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> mindspore_subgraph_detection
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">子图检测</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">项目介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithm.html">算法简述</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">使用指南</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">运行</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">终端运行</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python">Python中运行</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">运行参数</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="result.html">测试结果</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">更新日志</a></li>
+</ul>
+<p class="caption"><span class="caption-text">APIs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/detect_subgraph.html">Detect subgraph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/datastructure.html">DataStructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/executor.html">Executor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/util.html">Utils</a></li>
+</ul>
+<p class="caption"><span class="caption-text">引用</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">外部依赖</a></li>
+</ul>
+<p class="caption"><span class="caption-text">项目简述</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.html">HTML格式</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.pdf">PDF格式</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://loopyme.gitee.io/mindspore_subgraph_detection/_static/algorithm-PPT.pptx">PPT格式</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mindspore_subgraph_detection</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>使用指南</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pages/usage.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>使用指南<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>安装<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>首先需要手动安装一些依赖项，也即本项目的上游项目Mindspore和Mindinsight，建议到<a class="reference external" href="https://www.mindspore.cn/install">Mindspore文档</a>中查询相关安装方式。</p>
+<p>本项目托管于Gitee，并在Github和中科院软件所智能软件研究中心Gitlab上保持镜像，可以从下面的任何托管仓库下载本项目的Release包，若想获得最新版本，也可以clone repo。</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://gitee.com/loopyme/mindspore_subgraph_detection">repo at Gitee</a></p></li>
+<li><p><a class="reference external" href="https://github.com/loopyme/mindspore_subgraph_detection">repo at Github</a></p></li>
+<li><p><a class="reference external" href="https://isrc.iscas.ac.cn/gitlab/summer2020/students/proj-2017182">repo at ISCAS-Gitlab</a></p></li>
+</ul>
+<p>下载完毕后，在你习惯的Python环境下，只需运行<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span></code>就能安装SubgraphDetection</p>
+<p>接下来，可以在终端中输入<code class="docutils literal notranslate"><span class="pre">detect-subgraph</span> <span class="pre">-v</span></code>查看安装的项目版本，若出现版本号，安装就成功了。</p>
+</div>
+<div class="section" id="id3">
+<h2>运行<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h3>终端运行<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>安装结束后，在命令行输入<code class="docutils literal notranslate"><span class="pre">detect-subgraph</span> <span class="pre">-h</span></code>以查看所有的SubgraphDetection命令行参数和使用方法。</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>usage: detect-subgraph [-h] [-v] [--verbose] [--safe-mode] [-w MAX_WORKER]
+                       [-i MIN_SUBGRAPH_INSTANCE_NUMBER]
+                       [--min-nodes MIN_SUBGRAPH_NODE_NUMBER]
+                       [--max-nodes MAX_SUBGRAPH_NODE_NUMBER]
+                       [-p SUB_SUB_GRAPH_THRESHOLD_PENALTY]
+                       [--skipped-level SKIPPED_LEVEL] [-c]
+                       [--disable_scope_boundary] [-d]
+                       graph path result path
+
+Detect subgraphs in a Mindspore computational graph
+
+positional arguments:
+  graph path            The path of the pb file where the whole graph are
+                        stored
+  result path           The path of json file where the detected subgraphs
+                        should be dumped.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --version         show program&#39;s version number and exit
+  --verbose             Print details to console
+  --safe-mode, -s       Do some extra computation to make sure safety
+  -w MAX_WORKER, --worker MAX_WORKER
+                        The worker number of Thread Pool, -1 = cqu_count
+  -i MIN_SUBGRAPH_INSTANCE_NUMBER, --min-instance MIN_SUBGRAPH_INSTANCE_NUMBER
+                        The minimum instance number of a subgraph, subgraph
+                        with fewer instances will not be detected
+  --min-nodes MIN_SUBGRAPH_NODE_NUMBER
+                        The minimum node number of a subgraph, subgraph
+                        instance with fewer nodes will not be detected
+  --max-nodes MAX_SUBGRAPH_NODE_NUMBER
+                        The maximum node number of a subgraph, subgraph
+                        instance with more nodes will not be detected
+  -p SUB_SUB_GRAPH_THRESHOLD_PENALTY, --penalty SUB_SUB_GRAPH_THRESHOLD_PENALTY
+                        Impose penalty terms on sub-sub-graph in thresholds to
+                        avoid multiple level subgraphs
+  --skipped-level SKIPPED_LEVEL
+                        The number of the skipped top levels
+  -c, --check_result    Check the result after finish calculation
+  --disable_scope_boundary
+                        disable the scope boundary, the subgraph instance will
+                        not be restricted to a scope
+  -d, --detailed_isomorphic_check
+                        check the isomorphism of name scope in detail
+</pre></div>
+</div>
+<p>若使用默认配置项，使用下面的命令就能触发子图挖掘运算（后面的两个参数分别为计算图文件路径和预设的结果输出路径）</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>detect-subgraph ./ms_output.pb ./subgraph.json
+</pre></div>
+</div>
+</div>
+<div class="section" id="python">
+<h3>Python中运行<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
+<p>接口十分清晰，只需要向函数传递计算图文件路径和结果路径即可。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">SubgraphDetection</span> <span class="kn">import</span> <span class="n">detect_subgraph</span>
+
+<span class="n">detect_subgraph</span><span class="p">(</span>
+    <span class="n">graph_path</span><span class="o">=</span><span class="s2">&quot;./ms_output.pb&quot;</span><span class="p">,</span>
+    <span class="n">result_path</span><span class="o">=</span><span class="s2">&quot;./subgraph.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>也可以在后面附加上一些其他配置项：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>from SubgraphDetection import detect_subgraph
+
+detect_subgraph(
+    graph_path=&quot;./ms_output.pb&quot;,
+    result_path=&quot;./subgraph.json&quot;，
+    check_result = True,
+    verbose=True,
+    max_worker=4)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>运行参数<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>目前已提供了简洁的参数调整接口，以下运行参数都可自行调整。</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th align="center">配置项</th>
+<th align="center">解释</th>
+<th align="center">可选值</th>
+<th align="center">默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>SAFE_MODE</code></td>
+<td align="center">安全模式，是否进行一些额外的运算来保证计算中间结果是正常的</td>
+<td align="center">(bool) True,False</td>
+<td align="center">False</td>
+</tr>
+<tr>
+<td align="center"><code>VERBOSE</code></td>
+<td align="center">详细的输出</td>
+<td align="center">(bool)True,False</td>
+<td align="center">False</td>
+</tr>
+<tr>
+<td align="center"><code>CHECK_RESULT</code></td>
+<td align="center">自动的检查输出的各项参数</td>
+<td align="center">(bool)True,False</td>
+<td align="center">False</td>
+</tr>
+<tr>
+<td align="center"><code>MAX_WORKER</code></td>
+<td align="center">并发线程数,-1表示使用CPU数目</td>
+<td align="center">(int)&gt;0 or -1</td>
+<td align="center">-1</td>
+</tr>
+<tr>
+<td align="center"><code>MIN_SUBGRAPH_INSTANCE_NUMBER</code></td>
+<td align="center">子图模式的频繁阈值，实例数小于该值的子图模式将不被接受</td>
+<td align="center">(int)&gt;=0</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center"><code>MIN_SUBGRAPH_NODE_NUMBER</code></td>
+<td align="center">子图模式的大小阈值，节点数小于该值的子图模式将不被接受</td>
+<td align="center">(int)&gt;=0</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center"><code>MAX_SUBGRAPH_NODE_NUMBER</code></td>
+<td align="center">子图模式的大小阈值，节点数大于该值的子图模式将不被接受</td>
+<td align="center">(int)&gt;=0</td>
+<td align="center">36</td>
+</tr>
+<tr>
+<td align="center"><code>SUB_SUB_GRAPH_THRESHOLD_PENALTY</code></td>
+<td align="center">子图的子结构的罚项，考虑到某个子图的子结构可能是更频繁的子图，需要施加罚项以控制子图阶数</td>
+<td align="center">(int)&gt;=0</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center"><code>SCOPE_BOUNDARY</code></td>
+<td align="center">命名空间限制，使子图实例都在同一个命名空间中</td>
+<td align="center">(bool) True,False</td>
+<td align="center">True</td>
+</tr>
+<tr>
+<td align="center"><code>DETAILED_ISOMORPHIC_CHECK</code></td>
+<td align="center">仔细的检查scope是否同构，否则只认为名称相同的scope同构</td>
+<td align="center">(bool) True,False</td>
+<td align="center">False</td>
+</tr>
+<tr>
+<td align="center"><code>SKIPPED_LEVEL</code></td>
+<td align="center">不进行子图挖掘的顶部节点层次</td>
+<td align="center">(int)&gt;=1</td>
+<td align="center">3</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="result.html" class="btn btn-neutral float-right" title="测试结果" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="algorithm.html" class="btn btn-neutral float-left" title="算法简述" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Peter
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
